@@ -1,34 +1,34 @@
-class Router{
+<?php 
 
-    /**
-     * @var string
-     */
-    public static $method;
+class Router {
 
-    public function get($method, $url, $controller, $function, $middleware = "guest") {
+//      ┌────────────────┐
+//      │  Var => Array  │
+//      └────────────────┘
+    private $routes = [];
 
-        if (isset($_GET['action'])) {
-            if ($_GET['action'] == 'listPosts') {
-                listPosts();
-            }
-            elseif ($_GET['action'] == 'post') {
-                if (isset($_GET['id']) && $_GET['id'] > 0) {
-                        post();
-                    }
-                else {
-                    echo 'Erreur : aucun identifiant de billet envoyé';
-                }
-            }
-        }
-        else {
-            listPosts();
+//      ┌──────────────────────────────────────────┐
+//      │  explode $path to get pushed in $routes  │
+//      └──────────────────────────────────────────┘
+    public function add($url, $path) {
+
+        $array = explode("@", $path);
+        $this->routes[$url] = [];
+        
+        foreach ($array as $element) {
+            array_push($this->routes[$url], $element);
         }
     }
-    <!-- dont forget to add get to array -->
+
+//      ┌────────────────────────────────────────────────────┐
+//      │  Redirect to function in controller on url change  │
+//      └────────────────────────────────────────────────────┘
+    public function run() {
+
+        foreach ($routes as $key => $value) {
+            if($_GET["page"] == $key){
+                //redirect with $value[0] et $value[1]
+            }
+        }
+    }
 }
-
-
-<!-- 
-$route = new Router();
-$route->get('/', 'controller', 'function', 'admin')
- -->
