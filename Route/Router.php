@@ -1,5 +1,9 @@
 <?php 
 
+require "./Route.php";
+require "./RouterException.php";
+
+
 class Router {
 
 //      ┌────────────────┐
@@ -7,28 +11,51 @@ class Router {
 //      └────────────────┘
     private $routes = [];
 
-//      ┌──────────────────────────────────────────┐
-//      │  explode $path to get pushed in $routes  │
-//      └──────────────────────────────────────────┘
-    public function add($url, $path) {
+//      ┌─────────────────┐
+//      │  Var => String  │
+//      └─────────────────┘
+    private $url;
 
-        $array = explode("@", $path);
-        $this->routes[$url] = [];
-        
-        foreach ($array as $element) {
-            array_push($this->routes[$url], $element);
-        }
+//      ┌────────────────────┐
+//      │  Construct Method  │
+//      └────────────────────┘
+    public function __construct($url){
+        $this->url = $url;
     }
 
-//      ┌────────────────────────────────────────────────────┐
-//      │  Redirect to function in controller on url change  │
-//      └────────────────────────────────────────────────────┘
-    public function run() {
+//      ┌─────────────────┐
+//      │  Construct GET  │
+//      └─────────────────┘
+    public function get($path, $callable) {
+        $route = new Route($path, $callable);
+        $this->routes['GET'][] = $route;
+    }
 
-        foreach ($routes as $key => $value) {
-            if($_GET["page"] == $key){
-                //redirect with $value[0] et $value[1]
+//      ┌──────────────────┐
+//      │  Construct POST  │
+//      └──────────────────┘
+    public function post($path, $callable) {
+        $route = new Route($path, $callable);
+        $this->routes['POST'][] = $route;
+    }
+
+    public function print() {
+        // var_dump( $_GET['url'] );
+        echo '<pre>';
+        echo print_r($this->routes);
+        echo '</pre>';
+    }
+
+    public function run() {
+        if(!isset($this->routes[$_SERVER['REQUEST_METHOD']])){
+            throw new RouterException('REQUEST_METHOD does not exist');
+        }
+        foreach ($this->routes[$_SERVER['REQUEST_METHOD']] as $route) {
+            if($route->match($this->url)){
+                return $route->call();
             }
         }
+        throw new RouterException('No matching routes');
+        
     }
 }
