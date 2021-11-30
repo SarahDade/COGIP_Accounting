@@ -1,5 +1,5 @@
 <?php
-    require 'People.php';
+    require '../../Model/People';
     
     $request = $bdd -> query('SELECT * FROM people WHERE id = '. $_POST['id']);
 

@@ -1,29 +1,19 @@
 <?php
-    require 'People.php';
+    require '../../Model/People';
+    require './controller/Validation.php';
 
     if(isset($_POST['submit'])){
 
         if(!empty($_POST['firstname']) AND !empty($_POST['surname']) AND !empty($_POST['email'])){
 
-            $firstname = htmlspecialchars($_POST['firstname']); 
-            $surname = htmlspecialchars($_POST['surname']);
-            $email = htmlspecialchars($_POST['email']);
+            $firstname = $_POST['firstname']; 
+            $surname = $_POST['surname'];
+            $email = $_POST['email'];
 
-            // Sanitize
-            $sanit = array(
-                'firstname' => FILTER_SANITIZE_STRING,
-                'lastname' => FILTER_SANITIZE_STRING,
-                'email' => FILTER_SANITIZE_EMAIL
-            );
-
-            $result = filter_input_array(INPUT_POST, $sanit);
-            if($result != null AND $result != FALSE){
-                echo "All fields have been cleaned";
-            }
-            else{
-                echo "A fields is empty or is not correct";
-            }
-            //End sanitize
+            $validation = new Validate();
+            $validation->string($firstname);
+            $validation->string($surname);
+            $validation->email($email);
 
             
             $request = $bdd -> prepare('INSERT INTO people(firstname, surname, email) VALUES(?, ?, ?)');
@@ -54,6 +44,14 @@
 <body>
     <h1>Create a new contact</h1>
 
+    <ul>
+        <li>
+            <a href="./index.php">Contact page</a>
+        </li>
+        <li>
+            <a href="./update.php">Update contact</a>
+        </li>
+    </ul>
     <form action="" method="POST">
 
         <input type="text" name="firstname" placeholder="firstname">

@@ -1,5 +1,5 @@
 <?php
-    require 'People.php';
+    require '../../Model/People';
     require 'delete.php';
 
     $request = $bdd -> query('SELECT * FROM people ORDER BY firstname ASC');
@@ -16,6 +16,14 @@
 </head>
 <body>
     <h1>Contact Page</h1>
+    <ul>
+        <li>
+            <a href="./create.php">Create contact</a> 
+        </li>
+        <li>
+            <a href="./update.php">Update contact</a> 
+        </li>
+    </ul>
     <table border='1px solid black'>
         <tr>
             <td>
@@ -34,21 +42,21 @@
             <?php
                 while($data = $request -> fetch()){
             ?>
-                <form action="" method="POST">
+                <form action="" method="POST" name=form-<?php echo data['id'] ?>>
 
                     <tr>
                         <td>
                             <a href="./peopleDetails.php" value =<?php echo $data['id']?>><?php echo $data['firstname'];?></a>
                         </td>
-                        
+
                         <td>
                             <?php echo $data['surname'];?>
                         </td>
-                        
+
                         <td>
                             <?php echo $data['email'];?>
                         </td>
-                        
+
                         <td>
                             <!-- delete -->
                             <input type="hidden" name="id" value=<?php echo $data['id'];?>>
