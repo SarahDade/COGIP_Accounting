@@ -6,37 +6,31 @@ require "./RouterException.php";
 
 class Router {
 
-//      ┌────────────────┐
-//      │  Var => Array  │
-//      └────────────────┘
     private $routes = [];
-
-//      ┌─────────────────┐
-//      │  Var => String  │
-//      └─────────────────┘
     private $url;
 
-//      ┌────────────────────┐
-//      │  Construct Method  │
-//      └────────────────────┘
     public function __construct($url){
         $this->url = $url;
     }
 
-//      ┌─────────────────┐
-//      │  Construct GET  │
-//      └─────────────────┘
     public function get($path, $callable) {
         $route = new Route($path, $callable);
         $this->routes['GET'][] = $route;
     }
 
-//      ┌──────────────────┐
-//      │  Construct POST  │
-//      └──────────────────┘
     public function post($path, $callable) {
         $route = new Route($path, $callable);
         $this->routes['POST'][] = $route;
+    }
+
+    public function put($path, $callable) {
+        $route = new Route($path, $callable);
+        $this->routes['PUT'][] = $route;
+    }
+
+    public function delete($path, $callable) {
+        $route = new Route($path, $callable);
+        $this->routes['DELETE'][] = $route;
     }
 
     public function print() {
