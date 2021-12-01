@@ -1,6 +1,6 @@
 <?php
-    require '../../Model/People';
-    require './controller/Validation.php';
+    require '../../Model/People/People.php';
+    require '../../controller/Validation.php';
 
     if(isset($_POST['submit'])){
 
