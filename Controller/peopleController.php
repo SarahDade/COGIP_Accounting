@@ -1,5 +1,6 @@
 function index{
-    
+    $routes->print();
+    echo 'People index';
 }
 
 function show{

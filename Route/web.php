@@ -1,5 +1,7 @@
 <?php 
 
+die($_SERVER['REQUEST_URI']);
+
 require "./Router.php";
 $routes = new Router($_SERVER['REQUEST_URI']);
 
@@ -33,4 +35,4 @@ $routes->post('create-company', 'companyController@create');      // create
 $routes->put('edit-company', 'companyController@update');         // edit
 $routes->delete('delete-company', 'companyController@delete');    // delete
 
-$routes->print();
+// $routes->print();
