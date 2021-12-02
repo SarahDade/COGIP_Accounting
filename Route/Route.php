@@ -22,11 +22,26 @@ class Route{
 //      │  CALL  │
 //      └────────┘
     public function call($controller){
-        print_r( $controller );
-        echo '<hr>';
 
+        require($_SERVER['DOCUMENT_ROOT']."/COGIP_Accounting/Controller/".$file .".php");
 
-        // if else function => 404
-        require_once('./controller/'.$controller[0].'.php');
-    } 
+        $controller = new $file;
+        switch ($method) {
+            case "index":
+                $controller->index();
+                break;
+            case "show":
+                $controller->show();
+                break;
+            case "create":
+                $controller->create();
+                break;
+            case "update":
+                $controller->update();
+                break;
+            case "delete":
+                $controller->delete();
+                break;
+        }
+    }
 }

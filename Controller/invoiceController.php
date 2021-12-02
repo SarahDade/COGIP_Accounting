@@ -1,21 +1,10 @@
 <?php
 
-function index(){
-    echo 'testinvoiceindex';
-}
+require (__DIR__ . "./Controller.php");
 
-function show(){
-    
-}
+class invoiceController extends Controller{
 
-function create(){
-    
-}
-
-function update(){
-    
-}
-
-function delete(){
-    
+    public function index() {
+        echo "tonton";
+    }
 }
