@@ -4,13 +4,6 @@
 
 class Controller{
 
-    protected $model;
-    protected $index;
-    protected $show;
-    protected $create;
-    protected $update;
-    protected $delete;
-
 //      ┌─────────┐
 //      │  INDEX  │
 //      └─────────┘
@@ -22,7 +15,6 @@ class Controller{
 //      │  SHOW  │
 //      └────────┘
     public function show() {
-        echo "ffafaf";
     }
 
 //      ┌──────────┐

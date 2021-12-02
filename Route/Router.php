@@ -1,6 +1,8 @@
 <?php 
 
 require (__DIR__ . "./Route.php");
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__, 'config');
+$dotenv->load();
 
 class Router {
 
@@ -74,16 +76,17 @@ class Router {
 //      │  loader  │
 //      └──────────┘
     public function loader() {
+        $redirected = false;
 
         foreach ($this->routes as $route) {
             foreach ($route as $element) {
                 if( $element->path == $this->url ){
                     $element->call($element->callable);
+                    $redirected = true;
                 }
                 
             }
         }
-        // make à redirect to 404page file
-        echo "404 Not Found.";
+        if(!$redirected) require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/View/error/404.php"); 
     }
 }

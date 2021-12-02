@@ -1,5 +1,9 @@
 <?php
 
+require 'vendor/autoload.php';
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__, 'config');
+$dotenv->load();
+
 class Route{
 
     // how to turn it private?
@@ -23,7 +27,10 @@ class Route{
 //      └────────┘
     public function call($controller){
 
-        require($_SERVER['DOCUMENT_ROOT']."/COGIP_Accounting/Controller/".$file .".php");
+        $file = $controller[0];
+        $method = $controller[1];
+
+        require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/Controller/".$file .".php");
 
         $controller = new $file;
         switch ($method) {

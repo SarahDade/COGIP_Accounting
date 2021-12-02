@@ -4,7 +4,7 @@ require (__DIR__ . "./Router.php");
 $routes = new Router($_SERVER['REQUEST_URI']);
 
 //      homepage
-$routes->add('/', 'controller@index');                              // index
+$routes->add('/', 'globalController@index');                        // index
 
 //      ┌────────────────────┐
 //      │  PeopleController  │
