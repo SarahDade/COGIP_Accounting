@@ -2,7 +2,26 @@
     require '../../Model/People/People.php';
     require 'delete.php';
 
-    // check name
+        //----------------------------------------------------- UPDATE -----------------------------------------------------//
+    if(isset($_POST['name']) AND isset($_POST['VATnumber']) AND isset($_POST['country'])){
+        
+        $names = $_POST['name'];
+        $tva = $_POST['VATnumber'];
+        $country = $_POST['country'];
+
+        // $validationUpdate = new Validation();
+        // $validationUpdate->string($names);
+        // $validationUpdate->string($country);
+
+        $request = $bdd->prepare("UPDATE company SET name = :name, VATnumber = :VATnumber, country = :country WHERE id = :id");
+
+        $request -> execute(array(
+            'name' => $_POST['name'],
+            'VATnumber' => $_POST['VATnumber'],
+            'country' => $_POST['country'],
+            'id' => $_POST['id']
+        ));
+    }
     $request = $bdd -> query('SELECT * FROM company ORDER BY name ASC');
 
 ?>
@@ -56,6 +75,9 @@
                     <td>
                     <input type="hidden" name="id" value=<?php echo $data['id'];?>>
                     <input type="submit" name="del" value="delete">
+                    </td>
+                    <td>
+                        <a href="update.php?id=<?php echo $data['id'];?>">Update</a>
                     </td>
                 </tr>
             </form>

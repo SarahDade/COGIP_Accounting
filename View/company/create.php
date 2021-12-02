@@ -47,9 +47,6 @@
         <li>
             <a href="index.php">Company page</a>
         </li>
-        <li>
-            <a href="update.php">Update company</a>
-        </li>
     </ul>
     <form action="" method="POST">
         <input type="text" name="name" placeholder="Name country">
