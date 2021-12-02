@@ -1,19 +1,21 @@
-function index{
+<?php
+
+function index(){
+    echo 'testinvoiceindex';
+}
+
+function show(){
     
 }
 
-function show{
+function create(){
     
 }
 
-function create{
+function update(){
     
 }
 
-function update{
-    
-}
-
-function delete{
+function delete(){
     
 }

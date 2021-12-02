@@ -1,50 +1,68 @@
 <?php 
 
-require "./Route.php";
-require "./RouterException.php";
-
+require (__DIR__ . "./Route.php");
 
 class Router {
 
     private $routes = [];
     private $url;
 
-    public function __construct($url){
-        $this->url = $url;
+//      ┌───────────────────────────┐
+//      │  CONSTRUCT - CURRENT URL  │
+//      └───────────────────────────┘
+    public function __construct($url){    
+        $array = explode("/", $url);    
+
+        for ($i = 0; $i < 2; $i++) {
+            array_shift($array);  
+        }
+        
+        switch (count($array)) {
+            case 1:
+                if( $array[0] == ''){
+                    array_splice( $array, 0, 0, '/' ); 
+                }
+                break;
+            case 2:
+                array_splice( $array, 1, 0, '/' ); 
+                break;
+            case 3:
+                array_splice( $array, 1, 0, '/' ); 
+                array_splice( $array, 3, 0, '/' ); 
+                break;
+            case 4:
+                array_splice( $array, 1, 0, '/' ); 
+                array_splice( $array, 3, 0, '/' ); 
+                array_splice( $array, 5, 0, '/' ); 
+                break;
+        }
+        $array = implode("",$array);
+        $this->url = $array;
     }
 
 //      ┌───────┐
-//      │  GET  │
+//      │  ADD  │
 //      └───────┘
-    public function get($path, $callable) {
-        $route = new Route($path, $callable);
-        $this->routes['GET'][] = $route;
+    public function add($path, $callable) {
+
+        $array = explode("/", $path); 
+        $routesGroup = $array[0];
+
+        if( $routesGroup == '' ){
+
+            $route = new Route($path, $callable);
+            $this->routes['homepage'][] = $route;
+        }
+        else{
+            
+            $route = new Route($path, $callable);
+            $this->routes[$routesGroup][] = $route;
+        }
     }
 
-//      ┌────────┐
-//      │  POST  │
-//      └────────┘
-    public function post($path, $callable) {
-        $route = new Route($path, $callable);
-        $this->routes['POST'][] = $route;
-    }
-
-//      ┌───────┐
-//      │  PUT  │
-//      └───────┘
-    public function put($path, $callable) {
-        $route = new Route($path, $callable);
-        $this->routes['PUT'][] = $route;
-    }
-
-//      ┌──────────┐
-//      │  DELETE  │
-//      └──────────┘
-    public function delete($path, $callable) {
-        $route = new Route($path, $callable);
-        $this->routes['DELETE'][] = $route;
-    }
-
+//      ┌─────────┐
+//      │  PRINT  │
+//      └─────────┘
     public function print() {
         // var_dump( $_GET['url'] );
         echo '<pre>';
@@ -56,14 +74,13 @@ class Router {
 //      │  loader  │
 //      └──────────┘
     public function loader() {
-        if(!isset($this->routes[$_SERVER['REQUEST_METHOD']])){
-            throw new RouterException('REQUEST_METHOD does not exist');
-        }
-        foreach ($this->routes[$_SERVER['REQUEST_METHOD']] as $route) {
-            if($route->path == $this->url){
-                return $route->call();
+
+        foreach ($this->routes as $route) {
+            foreach ($route as $element) {
+                if( $element->path == $this->url ){
+                    $element->call($element->callable);
+                }
             }
         }
-        throw new RouterException('No matching routes');
     }
 }

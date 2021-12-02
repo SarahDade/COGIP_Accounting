@@ -2,9 +2,13 @@
 
 class Route{
 
-    private $path;
-    private $callable;
+    // how to turn it private?
+    public $path;
+    public $callable;
 
+//      ┌───────────────────────────────┐
+//      │  CONSTRUCT - PATH & CALLABLE  │
+//      └───────────────────────────────┘
     public function __construct($path, $callable){
 
         $this->path = trim($path);
@@ -14,7 +18,15 @@ class Route{
         $this->callable = $array;
     }
 
-    public function call(){
-        require('../Controller/'.$this->callable[0]); 
+//      ┌────────┐
+//      │  CALL  │
+//      └────────┘
+    public function call($controller){
+        print_r( $controller );
+        echo '<hr>';
+
+
+        // if else function => 404
+        require_once('./controller/'.$controller[0].'.php');
     } 
 }
