@@ -73,7 +73,7 @@ class Router {
     }
 
 //      ┌──────────┐
-//      │  loader  │
+//      │  LOADER  │
 //      └──────────┘
     public function loader() {
         $redirected = false;
