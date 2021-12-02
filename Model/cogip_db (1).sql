@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : jeu. 02 déc. 2021 à 14:54
+-- Généré le : jeu. 02 déc. 2021 à 15:21
 -- Version du serveur :  8.0.21
 -- Version de PHP : 7.4.9
 
@@ -47,6 +47,7 @@ CREATE TABLE IF NOT EXISTS `company` (
   `company_id` int UNSIGNED NOT NULL AUTO_INCREMENT,
   `company_name` varchar(30) NOT NULL,
   `country` varchar(30) NOT NULL,
+  `VAT_number` varchar(100) NOT NULL,
   PRIMARY KEY (`company_id`),
   UNIQUE KEY `id` (`company_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -119,7 +120,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `user_id` int NOT NULL AUTO_INCREMENT,
   `email` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
-  `category` varchar(10) NOT NULL COMMENT 'admin/user',
+  `right_access` tinyint NOT NULL,
   PRIMARY KEY (`user_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
