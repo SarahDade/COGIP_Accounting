@@ -21,22 +21,30 @@ class Route{
         $array = explode("@", $callable);
         $this->callable = $array;
     }
-
+    
 //      ┌──────────────┐
 //      │  MIDDLEWARE  │
 //      └──────────────┘
     public function middleware($access){
-        switch ($access) {
-            case "moderator":
-                if($user->rightaccess == 2){
+
+            switch ($access) {
+                case "moderator":
+                    echo "moderator";
+                    echo "<hr>";
+            /*                 if($user->rightaccess == 2){
                     // you need to make an SQL REQUEST here (depending on the model probably)
-                }
+                } */
+
                 break;
             case "admin":
-                if($user->rightaccess == 1){
+                echo "admin";
+                echo "<hr>";
+            /*                 if($user->rightaccess == 1){
                     // you need to make an SQL REQUEST here (depending on the model probably)
-                }
+                } */
+            
                 break;
+
         }
     }
 

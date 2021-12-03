@@ -8,5 +8,6 @@
 </head>
 <body>
     <h1>PEOPLE</h1>
+    <p>create</p>
 </body>
 </html>

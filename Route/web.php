@@ -11,26 +11,26 @@ $routes->add('/', 'globalController@index');                                    
 //      └────────────────────┘
 $routes->add('people', 'peopleController@index');                                       // index
 $routes->add('people/$id', 'peopleController@show');                                    // show
-$routes->add('people/create', 'peopleController@create')->middleware('moderator');      // create
-$routes->add('people/edit/$id', 'peopleController@update')->middleware('admin');        // edit
-$routes->add('people/delete/$id', 'peopleController@delete')->middleware('admin');      // delete
+$routes->add('people/create', 'peopleController@create');                               // create
+$routes->add('people/edit/$id', 'peopleController@update');                             // edit
+$routes->add('people/delete/$id', 'peopleController@delete');                           // delete
 
 //      ┌─────────────────────┐
 //      │  InvoiceController  │
 //      └─────────────────────┘
 $routes->add('invoice', 'invoiceController@index');                                     // index
 $routes->add('invoice/$id', 'invoiceController@show');                                  // show
-$routes->add('invoice/create', 'invoiceController@create')->middleware('moderator');    // create
-$routes->add('invoice/edit/$id', 'invoiceController@update')->middleware('admin');      // edit
-$routes->add('invoice/delete/$id', 'invoiceController@delete')->middleware('admin');    // delete
+$routes->add('invoice/create', 'invoiceController@create');                             // create
+$routes->add('invoice/edit/$id', 'invoiceController@update');                           // edit
+$routes->add('invoice/delete/$id', 'invoiceController@delete');                         // delete
 
 //      ┌─────────────────────┐
 //      │  CompanyController  │
 //      └─────────────────────┘
 $routes->add('company', 'companyController@index');                                     // index
 $routes->add('company/$id', 'companyController@show');                                  // show
-$routes->add('company/create', 'companyController@create')->middleware('moderator');    // create
-$routes->add('company/edit/$id', 'companyController@update')->middleware('admin');      // edit
-$routes->add('company/delete/$id', 'companyController@delete')->middleware('admin');    // delete
+$routes->add('company/create', 'companyController@create');                             // create
+$routes->add('company/edit/$id', 'companyController@update');                           // edit
+$routes->add('company/delete/$id', 'companyController@delete');                         // delete
 
 $routes->loader();

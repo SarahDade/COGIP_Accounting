@@ -8,5 +8,22 @@
 </head>
 <body>
     <h1>HOMEPAGE</h1>
+    <header>
+            <nav>
+                <ul>
+                    <li><a href="./people">people</a></li>
+                </ul>
+                <ul>
+                    <li><a href="http://">moncul</a></li>
+                </ul>
+                <ul>
+                    <li><a href="http://"></a></li>
+                </ul>
+                <ul>
+                    <li><a href="http://"></a></li>
+                    <a href="http://"></a>
+                </ul>
+            </nav>
+    </header>
 </body>
 </html>

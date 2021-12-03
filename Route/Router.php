@@ -81,6 +81,23 @@ class Router {
         foreach ($this->routes as $route) {
             foreach ($route as $element) {
                 if( $element->path == $this->url ){
+                    switch ($element->callable[1]) {
+                        case 'create':
+                            
+                            $element->middleware('moderator');
+                            break;
+
+                        case 'edit':
+                            
+                            $element->middleware('admin');
+                            break;
+                            
+                        case 'delete':
+                            
+                            $element->middleware('admin');
+                            break;
+                    }
+                    
                     $element->call($element->callable);
                     $redirected = true;
                 }
