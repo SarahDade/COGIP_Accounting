@@ -7,6 +7,6 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>INVOICE</h1>
+    <h1>PEOPLE</h1>
 </body>
 </html>

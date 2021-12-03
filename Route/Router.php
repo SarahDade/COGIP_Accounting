@@ -1,0 +1,109 @@
+<?php 
+
+require (__DIR__ . "./Route.php");
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__, 'config');
+$dotenv->load();
+
+class Router {
+
+    private $routes = [];
+    private $url;
+
+//      ┌───────────────────────────┐
+//      │  CONSTRUCT - CURRENT URL  │
+//      └───────────────────────────┘
+    public function __construct($url){
+        $array = explode("/", $url);    
+
+        for ($i = 0; $i < 2; $i++) {
+            array_shift($array);  
+        }
+        
+        switch (count($array)) {
+            case 1:
+                if( $array[0] == ''){
+                    array_splice( $array, 0, 0, '/' );
+                }
+                break;
+            case 2:
+                array_splice( $array, 1, 0, '/' );
+                break;
+            case 3:
+                array_splice( $array, 1, 0, '/' );
+                array_splice( $array, 3, 0, '/' );
+                break;
+            case 4:
+                array_splice( $array, 1, 0, '/' );
+                array_splice( $array, 3, 0, '/' );
+                array_splice( $array, 5, 0, '/' );
+                break;
+        }
+        $array = implode("",$array);
+        $this->url = $array;
+    }
+
+//      ┌───────┐
+//      │  ADD  │
+//      └───────┘
+    public function add($path, $callable) {
+
+        $array = explode("/", $path); 
+        $routesGroup = $array[0];
+
+        if( $routesGroup == '' ){
+
+            $route = new Route($path, $callable);
+            $this->routes['homepage'][] = $route;
+        }
+        else{
+            
+            $route = new Route($path, $callable);
+            $this->routes[$routesGroup][] = $route;
+        }
+    }
+
+//      ┌─────────┐
+//      │  PRINT  │
+//      └─────────┘
+    public function print() {
+        // var_dump( $_GET['url'] );
+        echo '<pre>';
+        echo print_r($this->routes);
+        echo '</pre>';
+    }
+
+//      ┌──────────┐
+//      │  LOADER  │
+//      └──────────┘
+    public function loader() {
+        $redirected = false;
+
+        foreach ($this->routes as $route) {
+            foreach ($route as $element) {
+                if( $element->path == $this->url ){
+                    switch ($element->callable[1]) {
+                        case 'create':
+                            
+                            $element->middleware('moderator');
+                            break;
+
+                        case 'edit':
+                            
+                            $element->middleware('admin');
+                            break;
+                            
+                        case 'delete':
+                            
+                            $element->middleware('admin');
+                            break;
+                    }
+                    
+                    $element->call($element->callable);
+                    $redirected = true;
+                }
+                
+            }
+        }
+        if(!$redirected) require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/View/error/404.php"); 
+    }
+}
