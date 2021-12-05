@@ -9,14 +9,16 @@ class Route{
     // how to turn it private?
     public $path;
     public $callable;
+    public $id;
 
 //      ┌───────────────────────────────┐
 //      │  CONSTRUCT - PATH & CALLABLE  │
 //      └───────────────────────────────┘
-    public function __construct($path, $callable){
+    public function __construct($path, $callable, $id = null){
 
         $this->path = trim($path);
-        $this->$path = $path;
+        $this->path = $path;
+        $this->id = $id;
 
         $array = explode("@", $callable);
         $this->callable = $array;
@@ -31,7 +33,7 @@ class Route{
                 case "moderator":
                     echo "moderator";
                     echo "<hr>";
-            /*                 if($user->rightaccess == 2){
+            /*                 if($user->rightaccess == 1){
                     // you need to make an SQL REQUEST here (depending on the model probably)
                 } */
 
@@ -39,7 +41,7 @@ class Route{
             case "admin":
                 echo "admin";
                 echo "<hr>";
-            /*                 if($user->rightaccess == 1){
+            /*                 if($user->rightaccess >= 1){
                     // you need to make an SQL REQUEST here (depending on the model probably)
                 } */
             
@@ -51,8 +53,7 @@ class Route{
 //      ┌────────┐
 //      │  CALL  │
 //      └────────┘
-    public function call($controller){
-
+    public function call($controller, $id = null){
         $file = $controller[0];
         $method = $controller[1];
 
@@ -64,16 +65,19 @@ class Route{
                 $controller->index();
                 break;
             case "show":
-                $controller->show();
+                $controller->show($id);
                 break;
             case "create":
                 $controller->create();
                 break;
+            case "edit":
+                $controller->edit($id);
+                break;
             case "update":
-                $controller->update();
+                $controller->update($id);
                 break;
             case "delete":
-                $controller->delete();
+                $controller->delete($id);
                 break;
         }
     }

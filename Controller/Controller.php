@@ -14,7 +14,7 @@ class Controller{
 //      ┌────────┐
 //      │  SHOW  │
 //      └────────┘
-    public function show() {
+    public function show($id) {
         echo 'You need to create the show method to the current view !';
     }
 
@@ -28,21 +28,21 @@ class Controller{
 //      ┌────────┐
 //      │  EDIT  │
 //      └────────┘
-    public function edit() {
+    public function edit($id) {
         echo 'You need to create the edit method to the current view !';
     }
 
 //      ┌──────────┐
 //      │  UPDATE  │
 //      └──────────┘
-    public function update() {
+    public function update($id) {
         echo 'You need to create the update method to the current model !';
     }
 
 //      ┌──────────┐
 //      │  DELETE  │
 //      └──────────┘
-    public function delete() {
+    public function delete($id) {
         echo 'You need to create the delete method to the current model !';
     }
 }

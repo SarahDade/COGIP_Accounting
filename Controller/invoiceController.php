@@ -14,7 +14,7 @@ class invoiceController extends Controller{
 //      ┌────────┐
 //      │  SHOW  │
 //      └────────┘
-    public function show() {
+    public function show($id) {
         require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/View/invoice/show.php"); 
     }
 
@@ -28,19 +28,19 @@ class invoiceController extends Controller{
 //      ┌────────┐
 //      │  EDIT  │
 //      └────────┘
-    public function edit() {
+    public function edit($id) {
         require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/View/invoice/edit.php"); 
     }
 
 //      ┌──────────┐
 //      │  UPDATE  │
 //      └──────────┘
-    public function update() {
+    public function update($id) {
     }
 
 //      ┌──────────┐
 //      │  DELETE  │
 //      └──────────┘
-    public function delete() {
+    public function delete($id) {
     }
 }
