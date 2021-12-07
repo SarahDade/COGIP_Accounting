@@ -1,26 +1,26 @@
 <?php
-    require '../../Model/People/People.php';
+    require '../../Model/require.php';
     require '../../controller/Validation.php';
 
     if(isset($_POST['submit'])){
 
-        if(!empty($_POST['name']) AND !empty($_POST['VATnumber']) AND !empty($_POST['country'])){
+        if(!empty($_POST['company_name']) AND !empty($_POST['VAT_number']) AND !empty($_POST['country'])){
 
-            $name = $_POST['name'];
-            $VATnumber = $_POST['VATnumber'];
+            $company_name = $_POST['company_name'];
+            $VAT_number = $_POST['VAT_number'];
             $country = $_POST['country'];
 
             $validation = new validate();
-            $validation->string($name);
+            $validation->string($company_name);
             // validation tva string and number don't know how to do this
             $validation->string($country);
 
             // check name
-            $request = $bdd -> prepare('INSERT INTO company(name, VATnumber, country) VALUES(?, ?, ?)');
+            $request = $bdd -> prepare('INSERT INTO company(company_name, VAT_number, country) VALUES(?, ?, ?)');
 
             $request -> execute(array(
-                $name,
-                $VATnumber,
+                $company_name,
+                $VAT_number,
                 $country
             ));
 
@@ -49,8 +49,8 @@
         </li>
     </ul>
     <form action="" method="POST">
-        <input type="text" name="name" placeholder="Name country">
-        <input type="text" name="VATnumber" placeholder="T.V.A">
+        <input type="text" name="company_name" placeholder="Name country">
+        <input type="text" name="VAT_number" placeholder="T.V.A">
         <input type="text" name="country" placeholder="Country">
         <input type="submit" name="submit" value="submit">
     </form>

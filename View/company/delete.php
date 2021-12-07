@@ -2,14 +2,14 @@
     
     if(isset($_POST['del'])){
         
-        $name = $_POST['name'];
+        $company_name = $_POST['company_name'];
         $VATnumber = $_POST['VATnumber'];
         $country = $_POST['country'];
 
-        $request = $bdd -> prepare('DELETE FROM company WHERE id =' .$_POST['id']);
+        $request = $bdd -> prepare('DELETE FROM company WHERE company_id =' .$_POST['company_id']);
 
         $request -> execute(array(
-            $name,
+            $company_name,
             $VATnumber,
             $country
         ));

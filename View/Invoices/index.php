@@ -1,25 +1,19 @@
 <?php
-    require '../People.php';
+    require '../../Model/require.php';
     require 'delete.php';
 
     //----------------------------- UPDATE -----------------------------// 
-    if(isset($_POST['companies']) AND isset($_POST['types']) AND isset($_POST['invoicesNumber']) AND isset($_POST['dates'])){
+    if(isset($_POST['invoice_date'])){
 
-        $request = $bdd->prepare("UPDATE Invoices SET companies = :companies, types = :types, invoicesNumber = :invoicesNumber, dates = :dates WHERE id = :id");
+        $request = $bdd->prepare("UPDATE invoice SET invoice_date = :invoice_date WHERE invoice_id = :invoice_id");
 
         $request -> execute(array(
-            'companies' => $_POST['companies'],
-            'types' => $_POST['types'],
-            'invoicesNumber' => $_POST['invoicesNumber'],
-            'dates' => $_POST['dates'],
-            'id' => $_POST['id']
+            'invoice_date' => $_POST['invoice_date'],
+            'invoice_id' => $_POST['invoice_id']
         ));
     }
-    else{
-        echo "no way";
-    }
 
-    $request = $bdd->query('SELECT * FROM Invoices ORDER BY dates DESC'); 
+    $request = $bdd->query('SELECT * FROM invoice ORDER BY invoice_date DESC'); 
 ?>
 
 <!DOCTYPE html>
@@ -40,15 +34,6 @@
     <table border="1">
         <tr>
             <td>
-                Company
-            </td>
-            <td>
-                Type
-            </td>
-            <td>
-                Invoices
-            </td>
-            <td>
                 Date
             </td>
             <td>
@@ -59,26 +44,17 @@
             </td>
 
             <?php while($data = $request -> fetch()){?>
-                <form action="" method="POST" value="form-"<?php echo $data['id']?>>
+                <form action="" method="POST" value="form-"<?php echo $data['invoice_id']?>>
                     <tr>
                         <td>
-                            <a href=""><?php echo $data['companies'];?></a>
+                            <?php echo $data['invoice_date'];?>
                         </td>
                         <td>
-                            <?php echo $data['types'];?>
-                        </td>
-                        <td>
-                            <?php echo $data['invoicesNumber'];?>
-                        </td>
-                        <td>
-                            <?php echo $data['dates'];?>
-                        </td>
-                        <td>
-                            <input type="hidden" name="id" value=<?php echo $data['id'];?>>
+                            <input type="hidden" name="invoice_id" value=<?php echo $data['invoice_id'];?>>
                             <input type="submit" name="delete" value="delete">
                         </td>
                         <td>
-                            <a href="update.php?id=<?php echo $data['id'];?>">Update</a>
+                            <a href="update.php?invoice_id=<?php echo $data['invoice_id'];?>">Update</a>
                         </td>
                     </tr>
                 </form>

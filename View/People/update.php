@@ -1,5 +1,8 @@
 <?php
-    require '../../Model/People';
+    require '../../Model/require.php';
+
+    $request = $bdd -> query('SELECT * FROM people WHERE people_id=' .$_GET['people_id']);
+    $data = $request -> fetch();
 ?>
 
 <!DOCTYPE html>
@@ -21,11 +24,18 @@
         </li>
     </ul>
 
-    <form action="" method="POST">
-        <input type="text" name="firstname" placeholder="firstname">
-        <input type="text" name="surname" placeholder="surname">
-        <input type="email" name="email" placeholder="email">
-        <input type="submit" name="submit" value="submit">
+    <form action="index.php" method="POST">
+
+        <input type="hidden" name="people_id" value="<?php echo $data['people_id'] ;?>">
+
+        <input type="text" name="firstname" placeholder="firstname" value="<?php echo $data['firstname'];?>">
+
+        <input type="text" name="lastname" placeholder="lastname" value="<?php echo $data['lastname'];?>">
+
+        <input type="email" name="email" placeholder="email" value="<?php echo $data['email'];?>">
+        
+        <input type="submit" name="submitUpdate" value="submit">
+
     </form>
 </body>
 </html>

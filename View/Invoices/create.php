@@ -1,30 +1,20 @@
 <?php
-    require '../People.php';
-    require '../controller/Validation.php';
+    require '../../Model/require.php';
+    require '../../controller/Validation.php';
 
     if(isset($_POST['submit'])){
         
-        if(!empty($_POST['companies']) AND !empty($_POST['types']) AND !empty($_POST['invoicesNumber']) AND !empty($_POST['dates'])){
+        if(!empty($_POST['invoice_date'])){
 
-            $companies = $_POST['companies'];
-            $types = $_POST['types'];
-            $invoicesNumber = $_POST['invoicesNumber'];
-            $dates = $_POST['dates'];
+            $invoice_date = $_POST['invoice_date'];
 
             // sanitize
             $validation = new validate();
-            $validation->string($companies);
-            $validation->string($types);
-            // $validation->($invoicesNumber) don't know how
-            
 
-            $request = $bdd -> prepare('INSERT INTO Invoices (companies, types, invoicesNumber, dates) VALUES(?, ?, ?, ?)');
+            $request = $bdd -> prepare('INSERT INTO invoice (invoice_date) VALUES(?)');
 
             $request -> execute(array(
-                $companies,
-                $types,
-                $invoicesNumber,
-                $dates
+                $invoice_date
             ));
 
             echo "<script> alert(\"Your invoices is create\")</script>";
@@ -56,10 +46,7 @@
     </ul>
 
     <form action="" method="POST">
-        <input type="text" name="companies" placeholder="Company">
-        <input type="text" name="types" placeholder="Type">
-        <input type="text" name="invoicesNumber" placeholder="Invoices Number">
-        <input type="date" name="dates" placeholder="Date">
+        <input type="date" name="invoice_date" placeholder="Date">
         <input type="submit" name="submit" value="submit">
     </form>
 </body>

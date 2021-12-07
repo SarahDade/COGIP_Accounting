@@ -2,18 +2,12 @@
 
     if(isset($_POST['delete'])){
         
-        $companies = $_POST['companies'];
-        $types = $_POST['types'];
-        $invoicesNumber = $_POST['invoicesNumber'];
-        $dates = $_POST['dates'];
+        $invoice_date = $_POST['invoice_date'];
 
-        $request = $bdd -> prepare('DELETE FROM Invoices WHERE id =' .$_POST['id']);
+        $request = $bdd -> prepare('DELETE FROM invoice WHERE invoice_id =' .$_POST['invoice_id']);
 
         $request -> execute(array(
-            $companies,
-            $types,
-            $invoicesNumber,
-            $dates
+            $invoice_date
         ));
     }
 ?>

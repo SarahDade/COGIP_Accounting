@@ -2,18 +2,18 @@
 
     if(isset($_POST['del'])){
         
-        $id = $_POST['id'];
+        $people_id = $_POST['people_id'];
         $firstname = $_POST['firstname'];
-        $surname = $_POST['surname'];
+        $lastname = $_POST['lastname'];
         $email = $_POST['email'];
 
         
-        $request = $bdd -> prepare("DELETE FROM people WHERE id = " .$_POST['id']);
+        $request = $bdd -> prepare("DELETE FROM people WHERE people_id = " .$_POST['people_id']);
 
         $request -> execute(array(
-            $id,
+            $people_id,
             $firstname,
-            $surname,
+            $lastname,
             $email
         ));
     }

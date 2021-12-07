@@ -1,10 +1,8 @@
 <?php
-    require '../People.php';
+    require '../../Model/require.php';
 
-    $request = $bdd -> query('SELECT * FROM Invoices WHERE id='. $_GET['id']);
+    $request = $bdd -> query('SELECT * FROM invoice WHERE invoice_id='. $_GET['invoice_id']);
     $data = $request -> fetch();
-   
-    
 ?>
 
 <!DOCTYPE html>
@@ -25,15 +23,9 @@
 
     <form action="index.php" method="POST">
 
-        <input type="hidden" name="id" value="<?php echo $data['id'];?>">
+        <input type="hidden" name="invoice_id" value="<?php echo $data['invoice_id'];?>">
 
-        <input type="text" name="companies" placeholder="Company" value="<?php echo $data['companies'];?>">
-
-        <input type="text" name="types" placeholder="Type" value="<?php echo $data['types'];?>">
-
-        <input type="text" name="invoicesNumber" placeholder="invoicesNumber" value="<?php echo $data['invoicesNumber'];?>">
-
-        <input type="date" name="dates" placeholder="Date" value="<?php echo $data['dates'];?>">
+        <input type="text" name="invoice_date" placeholder="Date" value="<?php echo $data['invoice_date'];?>">
 
         <input type="submit" name="submitUpdate" value="Update">
     </form>

@@ -1,7 +1,7 @@
 <?php
-    require '../../Model/People/People.php';
+    require '../../Model/require.php';
 
-    $request = $bdd -> query('SELECT * FROM company WHERE id='. $_GET['id']);
+    $request = $bdd -> query('SELECT * FROM company WHERE company_id='. $_GET['company_id']);
     $data = $request -> fetch();
 ?>
 
@@ -27,11 +27,11 @@
     
     <form action="index.php" method="POST">
 
-        <input type="hidden" name="id" value="<?php echo $data['id']; ?>">
+        <input type="hidden" name="company_id" value="<?php echo $data['company_id']; ?>">
 
-        <input type="text" name="name" placeholder="Name" value="<?php echo $data['name'];?>">
+        <input type="text" name="company_name" placeholder="Name" value="<?php echo $data['company_name'];?>">
 
-        <input type="text" name="VATnumber" placeholder="T.V.A" value="<?php echo $data['VATnumber'];?>">
+        <input type="text" name="VAT_number" placeholder="T.V.A" value="<?php echo $data['VAT_number'];?>">
 
         <input type="text" name="country" placeholder="Country" value="<?php echo $data['country'];?>">
     

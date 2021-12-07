@@ -1,28 +1,29 @@
 <?php
-    require '../../Model/People/People.php';
+    require '../../Model/require.php';
     require 'delete.php';
 
         //----------------------------------------------------- UPDATE -----------------------------------------------------//
-    if(isset($_POST['name']) AND isset($_POST['VATnumber']) AND isset($_POST['country'])){
+    if(isset($_POST['company_name']) AND isset($_POST['VAT_number']) AND isset($_POST['country'])){
         
-        $names = $_POST['name'];
-        $tva = $_POST['VATnumber'];
+        $company_name = $_POST['company_name'];
+        $tva = $_POST['VAT_number'];
         $country = $_POST['country'];
 
         // $validationUpdate = new Validation();
-        // $validationUpdate->string($names);
+        // $validationUpdate->string($company_name);
         // $validationUpdate->string($country);
 
-        $request = $bdd->prepare("UPDATE company SET name = :name, VATnumber = :VATnumber, country = :country WHERE id = :id");
+        $request = $bdd->prepare("UPDATE company SET company_name = :company_name, VAT_number = :VAT_number, country = :country WHERE company_id = :company_id");
 
         $request -> execute(array(
-            'name' => $_POST['name'],
-            'VATnumber' => $_POST['VATnumber'],
+            'company_name' => $_POST['company_name'],
+            'VAT_number' => $_POST['VAT_number'],
             'country' => $_POST['country'],
-            'id' => $_POST['id']
+            'company_id' => $_POST['company_id']
         ));
     }
-    $request = $bdd -> query('SELECT * FROM company ORDER BY name ASC');
+    
+    $request = $bdd -> query('SELECT * FROM company ORDER BY company_name ASC');
 
 ?>
 
@@ -40,9 +41,6 @@
         <li>
             <a href="create.php">Create company</a>
         </li>
-        <li>
-            <a href="update.php">Update company</a>
-        </li>
     </ul>
 
     <table border="1px solid black">
@@ -59,25 +57,28 @@
             <td>
                 Delete
             </td>
+            <td>
+                Update
+            </td>
         </tr>
         <?php while($data = $request -> fetch()){ ?>
-            <form action="" method="POST" name=form-<?php echo $data['id'] ?>>
+            <form action="" method="POST" name=form-<?php echo $data['company_id'] ?>>
                 <tr>
                     <td>
-                        <a href="#"><?php echo $data['name']; ?></a>
+                        <a href="#"><?php echo $data['company_name']; ?></a>
                     </td>
                     <td>
-                        <?php echo $data['VATnumber']; ?>
+                        <?php echo $data['VAT_number']; ?>
                     </td>
                     <td>
                         <?php echo $data['country']; ?>
                     </td>
                     <td>
-                    <input type="hidden" name="id" value=<?php echo $data['id'];?>>
+                    <input type="hidden" name="company_id" value=<?php echo $data['company_id'];?>>
                     <input type="submit" name="del" value="delete">
                     </td>
                     <td>
-                        <a href="update.php?id=<?php echo $data['id'];?>">Update</a>
+                        <a href="update.php?company_id=<?php echo $data['company_id'];?>">Update</a>
                     </td>
                 </tr>
             </form>
