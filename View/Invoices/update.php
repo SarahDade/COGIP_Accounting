@@ -25,7 +25,7 @@
 
         <input type="hidden" name="invoice_id" value="<?php echo $data['invoice_id'];?>">
 
-        <input type="text" name="invoice_date" placeholder="Date" value="<?php echo $data['invoice_date'];?>">
+        <input type="date" name="invoice_date" placeholder="Date" value="<?php echo $data['invoice_date'];?>">
 
         <input type="submit" name="submitUpdate" value="Update">
     </form>

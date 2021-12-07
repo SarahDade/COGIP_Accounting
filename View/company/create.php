@@ -49,7 +49,7 @@
         </li>
     </ul>
     <form action="" method="POST">
-        <input type="text" name="company_name" placeholder="Name country">
+        <input type="text" name="company_name" placeholder="Name company">
         <input type="text" name="VAT_number" placeholder="T.V.A">
         <input type="text" name="country" placeholder="Country">
         <input type="submit" name="submit" value="submit">

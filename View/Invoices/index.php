@@ -47,7 +47,7 @@
                 <form action="" method="POST" value="form-"<?php echo $data['invoice_id']?>>
                     <tr>
                         <td>
-                            <?php echo $data['invoice_date'];?>
+                            <?php $date = $data['invoice_date']; echo implode('/', array_reverse(explode('-', $date)));?>
                         </td>
                         <td>
                             <input type="hidden" name="invoice_id" value=<?php echo $data['invoice_id'];?>>

@@ -1,23 +1,37 @@
 <?php
     require '../../Model/require.php';
-    require '../../controller/Validation.php';
+    require '../../controller/Validation.php';    
+
+    $requestCompany = $bdd -> query('SELECT * FROM company');
+    
+    $requestPeople = $bdd -> query('SELECT * FROM people');
+
+
 
     if(isset($_POST['submit'])){
         
         if(!empty($_POST['invoice_date'])){
 
             $invoice_date = $_POST['invoice_date'];
+            $company_id = $_POST['company_id'];
+            $people_id = $_POST['people_id'];
 
             // sanitize
             $validation = new validate();
 
-            $request = $bdd -> prepare('INSERT INTO invoice (invoice_date) VALUES(?)');
+            //Request
+            $request = $bdd -> prepare('INSERT INTO invoice (invoice_date, company_id, people_id) VALUES(?, ?, ?)');
 
             $request -> execute(array(
-                $invoice_date
+                $invoice_date,
+                $company_id,
+                $people_id
             ));
 
-            echo "<script> alert(\"Your invoices is create\")</script>";
+            var_dump($company_id);
+            var_dump($people_id);
+            
+            // echo "<script> alert(\"Your invoices is create\")</script>";
 
         }
 
@@ -46,7 +60,27 @@
     </ul>
 
     <form action="" method="POST">
-        <input type="date" name="invoice_date" placeholder="Date">
+
+        <input type="date" name="invoice_date">
+
+        <select name="company_id">
+            <?php while($dataCompany = $requestCompany -> fetch()){?>
+
+                <option name="<?php echo $dataCompany['company_name'];?>" value="<?php echo $dataCompany['company_id']; ?>"> <?php echo $dataCompany['company_name'];?> </option>
+
+            <?php }?>
+                 
+        </select>
+
+        <select name="people_id">
+            <?php while($dataPeople = $requestPeople -> fetch()){?>
+
+                <option name="<?php echo $dataPeople['firstname'];?>" value="<?php echo $dataPeople['people_id'] ?>"><?php echo $dataPeople['email'];?></option>
+
+            <?php }?>
+            
+        </select>
+
         <input type="submit" name="submit" value="submit">
     </form>
 </body>
