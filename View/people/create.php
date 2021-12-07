@@ -1,36 +1,11 @@
 <?php
-    require '../../Model/require.php';
-    require '../../controller/Validation.php';
 
-    if(isset($_POST['submit'])){
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__, '../../Route/config');
+$dotenv->load();
 
-        if(!empty($_POST['firstname']) AND !empty($_POST['lastname']) AND !empty($_POST['email'])){
+require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/Model/require.php");
 
-            $firstname = $_POST['firstname']; 
-            $lastname = $_POST['lastname'];
-            $email = $_POST['email'];
-
-            $validation = new Validate();
-            $validation->string($firstname);
-            $validation->string($lastname);
-            $validation->email($email);
-
-            
-            $request = $bdd -> prepare('INSERT INTO people(firstname, lastname, email) VALUES(?, ?, ?)');
-    
-            $request -> execute(array(
-                $firstname,
-                $lastname,
-                $email
-            ));
-
-            echo "<script>alert(\"Your contact is create\")</script>";
-        }
-        else{
-            echo "No way";
-        }
-    }
- 
+$requestPeople = $bdd -> query('SELECT * FROM company'); 
 ?>
 
 <!DOCTYPE html>
@@ -46,16 +21,24 @@
 
     <ul>
         <li>
-            <a href="./index.php">Contact page</a>
+            <a href="../people">Contact page</a>
         </li>
     </ul>
-    <form action="" method="POST">
+    <form action="./store" method="POST">
 
         <input type="text" name="firstname" placeholder="firstname">
         <input type="text" name="lastname" placeholder="lastname">
         <input type="email" name="email" placeholder="email">
-        <input type="submit" name="submit" value="submit">
 
+        <select  name="company_id">
+            <?php while($dataPeople = $requestPeople -> fetch()){?>
+                
+                <option name="<?php echo $dataPeople['company_name'];?>" value="<?php echo $dataPeople['company_id']; ?>"> <?php echo $dataPeople['company_name'];?> </option>
+
+            <?php }?>
+        </select>
+        
+        <input type="submit" name="submit" value="submit">
     </form>
 </body>
 </html>

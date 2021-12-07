@@ -70,6 +70,9 @@ class Route{
             case "create":
                 $controller->create();
                 break;
+            case "store":
+                $controller->store();
+                break;
             case "edit":
                 $controller->edit($id);
                 break;

@@ -10,7 +10,7 @@ ob_start();
 <?php 
 $content = ob_get_clean();
 
-require("../layout/template.php");
+require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/View/layout/template.php");
 
 
 

@@ -1,11 +1,9 @@
-<!DOCTYPE html>
-
 <?php
 function redirect($link){
     $array = explode("/", $_SERVER["REQUEST_URI"]);
 
     $numb = count($array);
-    var_dump($numb);
+    // var_dump($numb);
 
 
     $link = $link;
@@ -16,21 +14,23 @@ function redirect($link){
 
     } 
     else{
-        var_dump("ok");
+        // var_dump("ok");
         $redirect = "localhost" . $redirect. "/" . $link;
 
     } 
     
-    var_dump($redirect);
+    require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/Model/require.php");
+    // var_dump($redirect);
 }
 ?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $title ?></title>
-    <link rel="stylesheet" href=<?= $css?>>
+    <link rel="stylesheet" href=<?= $_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/public/assets/css/style.css"; ?>>
 </head>
 <body>
     <section class="container">

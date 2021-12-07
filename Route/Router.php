@@ -40,6 +40,11 @@ class Router {
         }
         $array = implode("",$array);
         $this->url = $array;
+
+        // ajout de route pour le dossier public (accessible à tous!!!) => onload
+        // http://localhost/COGIP_Accounting/public/assets/css/style.css
+
+
     }
 
 //      ┌───────┐

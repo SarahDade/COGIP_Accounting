@@ -25,6 +25,13 @@ class invoiceController extends Controller{
         require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/View/invoice/create.php"); 
     }
 
+//      ┌─────────┐
+//      │  STORE  │
+//      └─────────┘
+public function store() {
+    echo 'You need to create the store method to the current view !';
+}
+
 //      ┌────────┐
 //      │  EDIT  │
 //      └────────┘
