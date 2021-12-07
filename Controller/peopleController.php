@@ -14,7 +14,7 @@ class peopleController extends Controller{
 //      ┌────────┐
 //      │  SHOW  │
 //      └────────┘
-    public function show() {
+    public function show($id) {
         require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/View/people/show.php"); 
     }
 
@@ -28,19 +28,19 @@ class peopleController extends Controller{
 //      ┌────────┐
 //      │  EDIT  │
 //      └────────┘
-    public function edit() {
+    public function edit($id) {
         require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/View/people/edit.php"); 
     }
 
 //      ┌──────────┐
 //      │  UPDATE  │
 //      └──────────┘
-    public function update() {
+    public function update($id) {
     }
 
 //      ┌──────────┐
 //      │  DELETE  │
 //      └──────────┘
-    public function delete() {
+    public function delete($id) {
     }
 }

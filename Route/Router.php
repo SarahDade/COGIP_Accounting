@@ -12,13 +12,13 @@ class Router {
 //      ┌───────────────────────────┐
 //      │  CONSTRUCT - CURRENT URL  │
 //      └───────────────────────────┘
-    public function __construct($url){
+    public function __construct($url) {
         $array = explode("/", $url);    
 
         for ($i = 0; $i < 2; $i++) {
+
             array_shift($array);  
         }
-        
         switch (count($array)) {
             case 1:
                 if( $array[0] == ''){
@@ -46,18 +46,25 @@ class Router {
 //      │  ADD  │
 //      └───────┘
     public function add($path, $callable) {
-
+        $id = false;
         $array = explode("/", $path); 
         $routesGroup = $array[0];
 
-        if( $routesGroup == '' ){
+        if (stripos($path, '/$id') !== false) {
 
-            $route = new Route($path, $callable);
+            $path = substr($path, 0, strpos($path, '/$id'));
+            $id = '/$id';
+        }
+        if ($routesGroup == '') {
+
+            if ($id != false ) {$route = new Route($path, $callable, $id);}
+            else {$route = new Route($path, $callable);}
             $this->routes['homepage'][] = $route;
         }
-        else{
-            
-            $route = new Route($path, $callable);
+        else {
+
+            if ($id != false ) {$route = new Route($path, $callable, $id);}
+            else {$route = new Route($path, $callable);}
             $this->routes[$routesGroup][] = $route;
         }
     }
@@ -66,7 +73,6 @@ class Router {
 //      │  PRINT  │
 //      └─────────┘
     public function print() {
-        // var_dump( $_GET['url'] );
         echo '<pre>';
         echo print_r($this->routes);
         echo '</pre>';
@@ -80,30 +86,72 @@ class Router {
 
         foreach ($this->routes as $route) {
             foreach ($route as $element) {
-                if( $element->path == $this->url ){
-                    switch ($element->callable[1]) {
-                        case 'create':
-                            
-                            $element->middleware('moderator');
-                            break;
 
-                        case 'edit':
-                            
-                            $element->middleware('admin');
-                            break;
-                            
-                        case 'delete':
-                            
-                            $element->middleware('admin');
-                            break;
+                if ($element->id != false) {
+                    if (preg_match('~[0-9]+~', $this->url, $matches)) {
+
+                        $id = $matches[0];
+
+                        $url_treatment = explode("/", $this->url); 
+                        array_pop($url_treatment);
+                        $url_post_treatment = implode("/",$url_treatment);
+
+
+                        if ($element->path == $url_post_treatment) {
+
+                            switch ($element->callable[1]) {
+                                case 'create':
+                                    
+                                    $element->middleware('moderator');
+                                    break;
+        
+                                case 'edit':
+                                    
+                                    $element->middleware('admin');
+                                    break;
+                                    
+                                case 'delete':
+                                    
+                                    $element->middleware('admin');
+                                    break;
+                            }
+
+                            $element->call($element->callable, $id);
+                            $redirected = true;
+                        }
                     }
-                    
-                    $element->call($element->callable);
-                    $redirected = true;
                 }
-                
+                else {
+
+                    if ($element->path == $this->url) {
+
+                        switch ($element->callable[1]) {
+                            case 'create':
+                                
+                                $element->middleware('moderator');
+                                break;
+    
+                            case 'edit':
+                                
+                                $element->middleware('admin');
+                                break;
+                                
+                            case 'delete':
+                                
+                                $element->middleware('admin');
+                                break;
+                        }
+
+                        $element->call($element->callable);
+                        $redirected = true;
+                    }
+                }
             }
         }
-        if(!$redirected) require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/View/error/404.php"); 
+//          ┌──────────────────┐
+//          │  404 Not Found.  │
+//          └──────────────────┘
+        if (!$redirected) require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/View/error/404.php");  
     }
+    
 }
