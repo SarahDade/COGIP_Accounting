@@ -4,7 +4,7 @@ $css = "./public/assets/css/style.css";
 ob_start();
 ?>
     <h1>HOMEPAGE</h1>
-    <header>
+    <!-- <header>
             <nav>
                 <ul>
                     <li><a href="./people">people</a></li>
@@ -18,11 +18,11 @@ ob_start();
                 <ul>
                     <li><a href="http://"></a></li>
                     <a href="http://"></a>
-                </ul>
-            </nav>
-    </header>
+                </ul> -->
+            <!-- </nav> -->
+    <!-- </header> -->
 <?php
 $content = ob_get_clean();
 
 require("layout/template.php");
-?>
+
