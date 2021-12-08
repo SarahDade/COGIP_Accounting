@@ -1,5 +1,13 @@
 <?php $title = "Homepage" ;
-$css = "./public/assets/css/style.css";
+
+$x = explode("/", $_SERVER["PHP_SELF"]);
+if (count($x) < 4){
+    $css = "./public/assets/css/style.css";
+}
+else{
+    $css = "../public/assets/css/style.css";
+}
+
 
 ob_start();
 ?>

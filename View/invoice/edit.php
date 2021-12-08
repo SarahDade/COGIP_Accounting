@@ -1,4 +1,4 @@
-<<?php $title = "Edit Invoice";
+<?php $title = "Edit Invoice";
 
 $css = "../../public/assets/css/style.css";
 
