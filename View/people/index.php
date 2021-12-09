@@ -1,7 +1,8 @@
 <?php
 
     $title = "Error";
-    $css = "../../public/assets/css/style.css";
+    $css = "../../";
+    
 
     ob_start();
 ?>

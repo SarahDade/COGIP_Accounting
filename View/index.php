@@ -1,10 +1,9 @@
 <?php $title = "Homepage" ;
-$css = "./public/assets/css/style.css";
+$css = "../";
 
 ob_start();
 ?>
     <h1>HOMEPAGE</h1>
 <?php
 $content = ob_get_clean();
-
-require("layout/template.php");
+require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/View/layout/template.php");

@@ -1,6 +1,6 @@
 <?php 
     $title = "Edit People";
-    $css = "../../public/assets/css/style.css";
+    $css = "../../../";
 
     ob_start();
 ?>
@@ -8,10 +8,10 @@
 <h1>Update a contact</h1>
     <ul>
         <li>
-            <a href="../people">Contact page</a>
+            <a href="../../people">Contact page</a>
         </li>
         <li>
-            <a href="../people/create">Create contact</a>
+            <a href="../../people/create">Create contact</a>
         </li>
     </ul>
 

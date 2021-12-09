@@ -15,18 +15,6 @@ class peopleController extends Controller{
 
         require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/Model/require.php");
 
-        // Update
-        if(isset($_POST['firstname']) AND isset($_POST['lastname']) AND isset($_POST['email'])){
-
-            $request = $bdd -> prepare('UPDATE people SET firstname = :firstname, lastname = :lastname, email = :email WHERE people_id = :people_id');
-
-            $request -> execute(array(
-                'firstname' => $_POST['firstname'],
-                'lastname' => $_POST['lastname'],
-                'email' => $_POST['email'],
-                'people_id' => $_POST['people_id']
-            ));
-        }
 
         $request = $bdd -> query('SELECT * FROM people ORDER BY firstname ASC');
 
@@ -37,6 +25,11 @@ class peopleController extends Controller{
 //      │  SHOW  │
 //      └────────┘
     public function show($id) {
+        
+        require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/Model/require.php");
+
+        $request = $bdd -> query('SELECT * FROM people WHERE people_id=' .$id);
+        $data = $request -> fetch();
 
         require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/View/people/show.php"); 
     }
@@ -45,6 +38,10 @@ class peopleController extends Controller{
 //      │  CREATE  │
 //      └──────────┘
     public function create() {
+        require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/Model/require.php");
+        $requestPeople = $bdd -> query('SELECT * FROM company'); 
+        
+        $dataPeoples = $requestPeople -> fetchAll();
 
         require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/View/people/create.php"); 
     }
@@ -108,6 +105,20 @@ class peopleController extends Controller{
         $request = $bdd -> query('SELECT * FROM people WHERE people_id=' .$id);
         $data = $request -> fetch();
         
+
+        // Update
+        if(isset($_POST['firstname']) AND isset($_POST['lastname']) AND isset($_POST['email'])){
+
+            $request = $bdd -> prepare('UPDATE people SET firstname = :firstname, lastname = :lastname, email = :email WHERE people_id = :people_id');
+
+            $request -> execute(array(
+                'firstname' => $_POST['firstname'],
+                'lastname' => $_POST['lastname'],
+                'email' => $_POST['email'],
+                'people_id' => $_POST['people_id']
+            ));
+        }
+
         header('Location: ../../people');
     }
 

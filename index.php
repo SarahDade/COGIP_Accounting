@@ -1,3 +1,3 @@
 <?php 
 
-// require "./Route/web.php";
+require "./Route/web.php";
