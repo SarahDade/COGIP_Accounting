@@ -1,9 +1,5 @@
 <?php
     session_start();
-    if(!$_SESSION['compteAdmin']){
-        header('Location: index.php');
-    }
-
     require('logout.php');
 ?>
 
@@ -16,7 +12,7 @@
     <title>Menu admin</title>
 </head>
 <body>
-    <h1>Menu admin</h1>
+    <h1>Menu</h1>
     <ul>
         <li>
             <a href="../View/company/index.php">Company</a>

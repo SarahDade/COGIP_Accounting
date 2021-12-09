@@ -1,5 +1,4 @@
 <?php
-
     require 'login.php';
 ?>
 
@@ -16,10 +15,11 @@
 
     <form name="formConnexion" action="" method="POST">
 
-        <input type="text" name="mail" placeholder="Mail">
+        <input type="text" name="email" value="<?php echo $mail; ?>" placeholder="Mail">
         <input type="text" name="password" placeholder="password">
         <input type="submit" name="submit" value="submit">
 
+        <?php echo display_error(); ?>
     </form>
 </body>
 </html>
