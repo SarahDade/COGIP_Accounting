@@ -1,6 +1,19 @@
 <?php
-    require '../../Model/People';
+    require '../../Model/require.php';
     require 'delete.php';
+
+    // Update
+    if(isset($_POST['firstname']) AND isset($_POST['lastname']) AND isset($_POST['email'])){
+
+        $request = $bdd -> prepare('UPDATE people SET firstname = :firstname, lastname = :lastname, email = :email WHERE people_id = :people_id');
+
+        $request -> execute(array(
+            'firstname' => $_POST['firstname'],
+            'lastname' => $_POST['lastname'],
+            'email' => $_POST['email'],
+            'people_id' => $_POST['people_id']
+        ));
+    }
 
     $request = $bdd -> query('SELECT * FROM people ORDER BY firstname ASC');
 
@@ -20,9 +33,6 @@
         <li>
             <a href="./create.php">Create contact</a> 
         </li>
-        <li>
-            <a href="./update.php">Update contact</a> 
-        </li>
     </ul>
     <table border='1px solid black'>
         <tr>
@@ -38,19 +48,22 @@
             <td>
                 Delete
             </td>
+            <td>
+                Update
+            </td>
         </tr>
             <?php
                 while($data = $request -> fetch()){
             ?>
-                <form action="" method="POST" name=form-<?php echo data['id'] ?>>
+                <form action="" method="POST" name=form-<?php echo data['people_id'] ?>>
 
                     <tr>
                         <td>
-                            <a href="./peopleDetails.php" value =<?php echo $data['id']?>><?php echo $data['firstname'];?></a>
+                            <a href="./peopleDetails.php" value =<?php echo $data['people_id']?>><?php echo $data['firstname'];?></a>
                         </td>
 
                         <td>
-                            <?php echo $data['surname'];?>
+                            <?php echo $data['lastname'];?>
                         </td>
 
                         <td>
@@ -59,8 +72,12 @@
 
                         <td>
                             <!-- delete -->
-                            <input type="hidden" name="id" value=<?php echo $data['id'];?>>
+                            <input type="hidden" name="people_id" value=<?php echo $data['people_id'];?>>
                             <input type="submit" name="del" value="delete">
+                        </td>
+                        <td>
+                            <!-- Update -->
+                            <a href="update.php?people_id=<?php echo $data['people_id']; ?>">Update</a>
                         </td>
                     </tr> 
                 </form>

@@ -23,18 +23,6 @@ SET time_zone = "+00:00";
 
 -- --------------------------------------------------------
 
---
--- Structure de la table `checkouts`
---
-
-DROP TABLE IF EXISTS `checkouts`;
-CREATE TABLE IF NOT EXISTS `checkouts` (
-  `company_id` int UNSIGNED NOT NULL,
-  `type_id` int UNSIGNED NOT NULL,
-  PRIMARY KEY (`company_id`,`type_id`),
-  KEY `company_id` (`company_id`,`type_id`),
-  KEY `type_id` (`type_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -50,7 +38,8 @@ CREATE TABLE IF NOT EXISTS `company` (
   `VAT_number` varchar(100) NOT NULL,
   PRIMARY KEY (`company_id`),
   UNIQUE KEY `id` (`company_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  -- COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -68,7 +57,8 @@ CREATE TABLE IF NOT EXISTS `invoice` (
   UNIQUE KEY `id` (`invoice_id`),
   KEY `company_id` (`company_id`,`people_id`),
   KEY `people_id` (`people_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  -- COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -86,7 +76,8 @@ CREATE TABLE IF NOT EXISTS `people` (
   PRIMARY KEY (`people_id`),
   UNIQUE KEY `id` (`people_id`),
   KEY `company_id` (`company_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  -- COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -99,7 +90,8 @@ CREATE TABLE IF NOT EXISTS `type` (
   `type_id` int UNSIGNED NOT NULL,
   `category` varchar(30) NOT NULL,
   PRIMARY KEY (`type_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  -- COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `type`
@@ -122,7 +114,22 @@ CREATE TABLE IF NOT EXISTS `user` (
   `password` varchar(50) NOT NULL,
   `right_access` tinyint NOT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  -- COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Structure de la table `checkouts`
+--
+
+DROP TABLE IF EXISTS `checkouts`;
+CREATE TABLE IF NOT EXISTS `checkouts` (
+  `company_id` int UNSIGNED NOT NULL,
+  `type_id` int UNSIGNED NOT NULL,
+  PRIMARY KEY (`company_id`,`type_id`),
+  KEY `company_id` (`company_id`,`type_id`),
+  KEY `type_id` (`type_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  -- COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Contraintes pour les tables déchargées

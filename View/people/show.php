@@ -1,15 +1,13 @@
-<?php
+<?php 
 
-    $title = "Error";
-    $css = "../../";
-    
+$title = "List People";
+$css = "../../";
 
-    ob_start();
+ob_start();
 ?>
-    <h1>Contact Page</h1>
-    <ul>
+<ul>
         <li>
-            <a href="./people/create">Create contact</a> 
+            <a href="../people/create">Create contact</a> 
         </li>
     </ul>
     <table border='1px solid black'>
@@ -30,14 +28,11 @@
                 Update
             </td>
         </tr>
-            <?php
-                while($data = $request -> fetch()){
-            ?>
-                <form action="./people/delete/<?php echo $data['people_id'];?>" method="POST">
+                <form action="../people/delete/<?php echo $data['people_id'];?>" method="POST">
 
                     <tr>
                         <td>
-                            <a href=<?php echo "./people/".$data['people_id']?>><?php echo $data['firstname'];?></a>
+                            <?php echo $data['firstname'];?>
                         </td>
 
                         <td>
@@ -50,7 +45,7 @@
 
                         <td>
                             <!-- Update -->
-                            <a href=<?php echo "./people/edit/".$data['people_id']?>>Update</a>
+                            <a href=<?php echo "../people/edit/".$data['people_id']?>>Update</a>
                         </td>
 
                         <td>
@@ -60,12 +55,10 @@
                         </td>
                     </tr> 
                 </form>
-                <?php
-                }
-                ?>
         </tr>
     </table>
 
 <?php 
-    $content = ob_get_clean();
-    require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/View/layout/template.php");
+$content = ob_get_clean();
+
+require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/View/layout/template.php");

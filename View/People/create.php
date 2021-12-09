@@ -1,26 +1,26 @@
 <?php
-    require '../../Model/People/People.php';
+    require '../../Model/require.php';
     require '../../controller/Validation.php';
 
     if(isset($_POST['submit'])){
 
-        if(!empty($_POST['firstname']) AND !empty($_POST['surname']) AND !empty($_POST['email'])){
+        if(!empty($_POST['firstname']) AND !empty($_POST['lastname']) AND !empty($_POST['email'])){
 
             $firstname = $_POST['firstname']; 
-            $surname = $_POST['surname'];
+            $lastname = $_POST['lastname'];
             $email = $_POST['email'];
 
             $validation = new Validate();
             $validation->string($firstname);
-            $validation->string($surname);
+            $validation->string($lastname);
             $validation->email($email);
 
             
-            $request = $bdd -> prepare('INSERT INTO people(firstname, surname, email) VALUES(?, ?, ?)');
+            $request = $bdd -> prepare('INSERT INTO people(firstname, lastname, email) VALUES(?, ?, ?)');
     
             $request -> execute(array(
                 $firstname,
-                $surname,
+                $lastname,
                 $email
             ));
 
@@ -48,14 +48,11 @@
         <li>
             <a href="./index.php">Contact page</a>
         </li>
-        <li>
-            <a href="./update.php">Update contact</a>
-        </li>
     </ul>
     <form action="" method="POST">
 
         <input type="text" name="firstname" placeholder="firstname">
-        <input type="text" name="surname" placeholder="surname">
+        <input type="text" name="lastname" placeholder="lastname">
         <input type="email" name="email" placeholder="email">
         <input type="submit" name="submit" value="submit">
 

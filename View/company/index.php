@@ -1,47 +1,13 @@
 <?php
-    require '../../Model/People/People.php';
-    require 'delete.php';
+    $title = "Homepage" ;
+    $css = "../";
 
-        //----------------------------------------------------- UPDATE -----------------------------------------------------//
-    if(isset($_POST['name']) AND isset($_POST['VATnumber']) AND isset($_POST['country'])){
-        
-        $names = $_POST['name'];
-        $tva = $_POST['VATnumber'];
-        $country = $_POST['country'];
-
-        // $validationUpdate = new Validation();
-        // $validationUpdate->string($names);
-        // $validationUpdate->string($country);
-
-        $request = $bdd->prepare("UPDATE company SET name = :name, VATnumber = :VATnumber, country = :country WHERE id = :id");
-
-        $request -> execute(array(
-            'name' => $_POST['name'],
-            'VATnumber' => $_POST['VATnumber'],
-            'country' => $_POST['country'],
-            'id' => $_POST['id']
-        ));
-    }
-    $request = $bdd -> query('SELECT * FROM company ORDER BY name ASC');
-
+    ob_start();
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Read company</title>
-</head>
-<body>
     <h1>Company page</h1>
     <ul>
         <li>
-            <a href="create.php">Create company</a>
-        </li>
-        <li>
-            <a href="update.php">Update company</a>
+            <a href="./company/create">Create company</a>
         </li>
     </ul>
 
@@ -59,31 +25,37 @@
             <td>
                 Delete
             </td>
+            <td>
+                Update
+            </td>
         </tr>
-        <?php while($data = $request -> fetch()){ ?>
-            <form action="" method="POST" name=form-<?php echo $data['id'] ?>>
+        <?php 
+            foreach ($dataCompany as $data) {
+        ?>
+            <form action="./company/delete/<?php echo $data['company_id'] ?>" method="POST" name=form-<?php echo $data['company_id'] ?>>
                 <tr>
                     <td>
-                        <a href="#"><?php echo $data['name']; ?></a>
+                        <a href="./company/<?php echo $data['company_id'] ?>"><?php echo $data['company_name']; ?></a>
                     </td>
                     <td>
-                        <?php echo $data['VATnumber']; ?>
+                        <?php echo $data['VAT_number']; ?>
                     </td>
                     <td>
                         <?php echo $data['country']; ?>
                     </td>
                     <td>
-                    <input type="hidden" name="id" value=<?php echo $data['id'];?>>
+                    <input type="hidden" name="company_id" value=<?php echo $data['company_id'];?>>
                     <input type="submit" name="del" value="delete">
                     </td>
                     <td>
-                        <a href="update.php?id=<?php echo $data['id'];?>">Update</a>
+                        <a href="./company/edit/<?php echo $data['company_id'] ?>">Update</a>
                     </td>
                 </tr>
             </form>
         <?php
-        }
+            }
         ?>
     </table>
-</body>
-</html>
+    <?php
+$content = ob_get_clean();
+require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/View/layout/template.php");

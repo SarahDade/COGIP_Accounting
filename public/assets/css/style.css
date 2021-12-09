@@ -1,0 +1,127 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+header{
+    display: flex;
+    align-items: center;
+    height: 6vh;
+    background-color: #18A0FB;
+}
+header ul{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 7em;
+}
+header ul li{
+    flex-grow: 0.2;
+}
+header ul li a{
+    border-radius: 4px;
+    padding: 0.5vh 1vh 0.7vh;
+    transition-duration: 0.4s;
+    text-decoration: none;
+    color:#F4F4F4
+}
+header ul li a:hover{
+    background-color: #77bdeb;
+    transition-duration: 0.7s;
+}
+
+.logo{
+    /* flex-grow: 1.5; */
+    background-color: #18A0FB;
+    padding: 0 2em;
+}
+.logo p{
+    color: #F4F4F4;
+    font-weight: bold;
+    position: relative;
+}
+.wrapper{
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    grid-gap: 0;
+    text-align: center;
+    background-color: white;
+    padding: 1rem 0;
+}
+.bloc1{
+    position: relative;
+    grid-column: 2/9;
+    height: 85.1vh;
+    grid-row: 2;
+    background-color:#F4F4F4;
+    opacity: 80%;
+    border-radius: 5px;
+}
+
+ul, ol{
+    list-style: none;
+}
+
+table, form{
+    margin: 5vh auto 0;
+}
+
+.bloc2{
+    grid-column: 1/10;
+    grid-row: 1;
+    background-color: white;
+    color: #444;
+}
+
+
+button{
+    
+    border-radius: 3px;
+    padding: 5px 0px;
+    border-color: black;
+    border: solid;
+    
+}
+footer{
+    position: relative;
+    background-color: #18A0FB;
+    padding: 1rem 0;
+    width: 100%;
+    bottom: 0%;
+    text-align: center;
+}
+footer p{
+
+    color:#F4F4F4;
+}
+/* .white{
+    background-color:white;
+    padding: 1rem;
+} */
+
+::-webkit-scrollbar{
+    width: 3px;
+}
+
+::-webkit-scrollbar-thumb{
+    background: rgb(0, 119, 255);
+    border-radius: 20px;
+}
+::-webkit-scrollbar-thumb:hover{
+    background:blue;
+}
+
+@media only screen and (max-width:500px) {
+    .content1{
+        grid-column:1/10;
+        justify-content: center;
+    }
+    .content2,.content3,.content4,.content5,.content6,.content7{
+        visibility: hidden;
+    }
+    footer{
+        position: fixed;
+    }
+}
