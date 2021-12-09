@@ -40,11 +40,11 @@ function redirect($link){
     <header>
         <ul>
             <li class="logo"><p>COGIP</p></li>
-            <li><a href="../../../../../../../../../COGIP_Accounting">Home</a></li>
-            <li><a href="../../../../../../../../../COGIP_Accounting/invoice">Invoice</a></li>
-            <li><a href="../../../../../../../../../COGIP_Accounting/company">Company</a></li>
-            <li><a href="../../../../../../../../../COGIP_Accounting/people">People</a></li>
-            <li><a href="../../../../../../../../../COGIP_Accounting/login">Login</a></li>
+            <li><a href="/COGIP_Accounting">Home</a></li>
+            <li><a href="/COGIP_Accounting/invoice">Invoice</a></li>
+            <li><a href="/COGIP_Accounting/company">Company</a></li>
+            <li><a href="/COGIP_Accounting/people">People</a></li>
+            <li><a href="/COGIP_Accounting/login">Login</a></li>
         </ul>
     </header>
     

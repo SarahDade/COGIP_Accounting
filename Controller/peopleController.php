@@ -81,7 +81,7 @@ class peopleController extends Controller{
             }
         }
         // need to create an error/message system for this
-        header('Location: ../people/create');
+        header('Location: ../people');
     }
 
 //      ┌────────┐
@@ -132,7 +132,7 @@ class peopleController extends Controller{
 
             try{
                 require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/Model/require.php");
-                $request = $bdd -> prepare("DELETE FROM people WHERE people_id = $id");
+                $request = $bdd -> prepare('DELETE FROM people WHERE people_id ='. $id);
             
                 $request -> execute(array(
                     $people_id,

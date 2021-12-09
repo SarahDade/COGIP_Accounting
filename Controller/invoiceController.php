@@ -133,10 +133,17 @@ public function store() {
 //      └──────────┘
     public function delete($id) {
 
-        if(isset($_POST['delete'])){
+        echo '<pre>';
+        var_dump($_POST);
+        echo '</pre><br><br>';
+        var_dump($id);
+
+        // die();
+
+        if(isset($_POST['del'])){
             try{
                 require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/Model/require.php");
-                $request = $bdd -> prepare('DELETE FROM invoice WHERE invoice_id = $id');
+                $request = $bdd -> prepare('DELETE FROM invoice WHERE invoice_id ='. $id);
 
                 $request -> execute(array(
                     $invoice_id,

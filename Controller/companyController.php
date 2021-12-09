@@ -106,8 +106,7 @@ public function store() {
             $request -> execute(array(
                 'company_name' => $_POST['company_name'],
                 'VAT_number' => $_POST['VAT_number'],
-                'country' => $_POST['country'],
-                'company_id' => $_POST['company_id']
+                'country' => $_POST['country']
             ));
         }
         header('Location: ../../company');

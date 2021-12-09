@@ -59,7 +59,7 @@
                         </td>
                         <td>
                             <input type="hidden" name="invoice_id" value=<?php echo $invoice['invoice_id'];?>>
-                            <input type="submit" name="delete" value="delete">
+                            <input type="submit" name="del" value="delete">
                         </td>
                         <td>
                             <a href="./invoice/edit/<?php echo $invoice['invoice_id'];?>">Update</a>
