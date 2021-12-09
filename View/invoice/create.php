@@ -1,53 +1,42 @@
 <?php
-    require '../../Model/require.php';
-    require '../../controller/Validation.php';
 
-    if(isset($_POST['submit'])){
-        
-        if(!empty($_POST['invoice_date'])){
-
-            $invoice_date = $_POST['invoice_date'];
-
-            // sanitize
-            $validation = new validate();
-
-            $request = $bdd -> prepare('INSERT INTO invoice (invoice_date) VALUES(?)');
-
-            $request -> execute(array(
-                $invoice_date
-            ));
-
-            echo "<script> alert(\"Your invoices is create\")</script>";
-
-        }
-
-        else{
-            echo "no way";
-        }  
-    }
+    $title = "Error";
+    $css = "../../";
     
-?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create page</title>
-</head>
-<body>
+    ob_start();
+?>
 
     <h1>Create invoices</h1>
     <ul>
         <li>
-            <a href="index.php">Invoices page</a>
+            <a href="../invoice">Invoices page</a>
         </li>
     </ul>
 
-    <form action="" method="POST">
+    <form action="./store" method="POST">
+        <select  name="people_id">
+        <?php 
+            foreach ($dataPeoples as $dataPeople) {
+        ?>
+            <option name="people_id" value="<?php echo $dataPeople['people_id']; ?>"> <?php echo $dataPeople['firstname'].' '.$dataPeople['lastname'];?> </option>
+        
+        <?php } ?>
+        </select>
+
         <input type="date" name="invoice_date" placeholder="Date">
+
+        <select  name="company_id">
+        <?php 
+            foreach ($dataCompany as $company) {
+        ?>
+            <option name="company_id" value="<?php echo $company['company_id']; ?>"> <?php echo $company['company_name'];?> </option>
+        
+        <?php } ?>
+        </select>
+
         <input type="submit" name="submit" value="submit">
     </form>
-</body>
-</html>
+<?php 
+    $content = ob_get_clean();
+    require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/View/layout/template.php");

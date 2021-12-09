@@ -9,7 +9,7 @@
     <h1>Invoices page</h1>
     <ul>
         <li>
-            <a href="create.php">Create invoices</a>
+            <a href="./invoice/create">Create invoices</a>
         </li>
     </ul>
     <table border="1">
@@ -18,24 +18,51 @@
                 Date
             </td>
             <td>
+                People
+            </td>
+            <td>
+                Company
+            </td>
+            <td>
                 Delete
             </td>
             <td>
                 Update
             </td>
 
-            <?php while($data = $request -> fetch()){?>
-                <form action="./invoice/delete/<?php echo $data['invoice_id'];?>" method="POST">
+            <?php 
+                foreach ($dataInvoice as $invoice) {
+            ?>
+                <form action="./invoice/delete/<?php echo $invoice['invoice_id'];?>" method="POST">
                     <tr>
                         <td>
-                            <?php echo $data['invoice_date'];?>
+                            <?php echo $invoice['invoice_date']; ?>
                         </td>
                         <td>
-                            <input type="hidden" name="invoice_id" value=<?php echo $data['invoice_id'];?>>
+                            <?php 
+                                foreach ($dataPeoples as $people) {
+                                    if($people['people_id'] == $invoice['people_id']){
+                                        echo $people['firstname'].' '.$people['lastname'];
+                                    }
+                                }
+                            ?>
+                        </td>
+                        <td>
+                            <?php 
+                            
+                                foreach ($dataCompany as $company) {
+                                    if($company['company_id'] == $invoice['company_id']){
+                                        echo $company['company_name'];
+                                    }
+                                }
+                            ?>
+                        </td>
+                        <td>
+                            <input type="hidden" name="invoice_id" value=<?php echo $invoice['invoice_id'];?>>
                             <input type="submit" name="delete" value="delete">
                         </td>
                         <td>
-                            <a href="update.php?invoice_id=<?php echo $data['invoice_id'];?>">Update</a>
+                            <a href="./invoice/edit/<?php echo $invoice['invoice_id'];?>">Update</a>
                         </td>
                     </tr>
                 </form>
@@ -45,6 +72,6 @@
         </tr>
     </table>
 
-    <?php 
+<?php 
     $content = ob_get_clean();
     require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/View/layout/template.php");

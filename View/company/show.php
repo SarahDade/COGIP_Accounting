@@ -1,6 +1,7 @@
-<?php $title = "List Company";
+<?php 
 
-$css = "../../public/assets/css/style.css";
+$title = "List Company";
+$css = "../../";
 
 ob_start();
 ?>
@@ -10,4 +11,4 @@ ob_start();
 <?php 
 $content = ob_get_clean();
 
-require("../layout/template.php");
+require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/View/layout/template.php");

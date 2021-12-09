@@ -57,7 +57,6 @@ class peopleController extends Controller{
         $requestPeople = $bdd -> query('SELECT * FROM company');
 
         if(isset($_POST['submit'])){
-
             if(!empty($_POST['firstname']) AND !empty($_POST['lastname']) AND !empty($_POST['email'])){
 
                 $firstname = $_POST['firstname']; 
@@ -81,6 +80,8 @@ class peopleController extends Controller{
                 header('Location: ../people/create');
             }
         }
+        // need to create an error/message system for this
+        header('Location: ../people/create');
     }
 
 //      ┌────────┐
