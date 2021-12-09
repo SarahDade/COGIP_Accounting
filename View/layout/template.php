@@ -21,52 +21,67 @@ $invoice = redirect("invoice");
 
         <div class="content1"><p>COGIP</p></div>
 
-        <div class="content2"> <a href="<?=$homepage?>" >Home</a></div>
+        <div class="content2"> <a href="/cogipaccounting" >Home</a></div>
 
-        <div class="content3"> <a href=<?= $invoice ?>>Invoice</a></div>
+        <div class="content3"> <a href="/cogipaccounting/invoice">Invoice</a></div>
 
-        <div class="content4"> <a href=<?=$company?>>Company</a></div>
+        <div class="content4"> <a href="">Company</a></div>
 
-        <div class="content5"><a href=<?=$people?>>People</a></div>
+        <div class="content5"><a href="<?=$people?>">People</a></div>
 
-        <div class="content6"><a href="../company/show.php">Login</a></div>
+        <div class="content6"><a href="../cogipaccounting">Login</a></div>
 
         <div class="content7"></div>
     </section> 
     <main class="wrapper">
         
         <div class="bloc1">Hello</div>
+        
         <div class="bloc2">
         <?= $content ?>
         <?php 
 
 
         function redirect($link){
-
-            $array = explode("/", $_SERVER["REQUEST_URI"]);
             
+            $array = explode("/", "/cogipaccounting/people/edit");
+            $option = $link;
             $url = array("homepage" => array("" , "cogipaccounting"),
-            "people" => array("", "cogipaccounting", "people"),
-            "invoice" => array("", "cogipaccounting", "invoice"),
-            "company" => array("", "cogipaccounting", "company"));
+            "people" => array("", "cogipaccounting", "people", array("edit", "create", "store", "update", "delete" )),
+            "invoice" => array("", "cogipaccounting", "invoice", array("edit", "create", "store", "update", "delete")),
+            "company" => array("", "cogipaccounting", "company", array("edit", "create", "store", "update", "delete")),
+            $option => $array);
+
+            print_r($url[$option]);
+
+            // $url = $link => $url[$array[2]];
+            
+
+            print_r($url[$link]);
+            
+
+            var_dump(count($url["people"]));
 
             $inpath = count($array);
 
             $outpath = count($url[$link]);
 
+
+
             if ($outpath < $inpath){
 
                 $number = $inpath - $outpath;
                 
-                return (str_repeat("../", $number) . $url[$link][$number]);
+                var_dump([$number]);
+                var_dump(str_repeat("../", $number) . $url[$link][$number]);
                 // return str_repeat("../", $number) . $url[$link][$number];
             }
 
-            elseif($outpath == $inpath){
+            elseif($outpath > $inpath){
                 
                 $number = $outpath - $inpath;
                 
-                return("./" . $url[$link][$number+2]);
+                var_dump("./" . $url[$link][$number+1]);
 
             }
 
