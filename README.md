@@ -25,4 +25,13 @@ Nous avons entrepris ce projet suite à la demande d'un exercice à Becode Charl
 
 ## Comment?
 
-Nous avons tout d'abord organisé notre travail avec "trello". Nous avons ensuite choisis les étapes en fonctions de nos préférences/compétences
+Nous avons tout d'abord organisé notre travail avec "trello". Nous avons ensuite choisis les étapes en fonctions de nos préférences/compétences. Nous avons utilisé les méthodologies suivantes : 
+- mvc 
+- CRUD
+- rooter
+
+## Qui a fait quoi?
+- Christophe Buffe : CRUD, login/logout
+- Sarah dade :
+- Thibaut Fourneaux :
+- Zaccaria Tabi :
