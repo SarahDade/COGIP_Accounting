@@ -30,7 +30,7 @@
             </td>
         </tr>
         <?php 
-            foreach ($dataCompany as $data) {
+            foreach ($clients as $data) {
         ?>
             <form action="./company/delete/<?php echo $data['company_id'] ?>" method="POST" name=form-<?php echo $data['company_id'] ?>>
                 <tr>

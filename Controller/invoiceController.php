@@ -13,13 +13,13 @@ class invoiceController extends Controller{
     public function index() {        
         require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/Model/require.php");
 
-        $requestInvoice = $bdd->query('SELECT * FROM invoice ORDER BY invoice_date DESC'); 
-        $requestPeople = $bdd->query('SELECT * FROM people'); 
-        $requestCompany = $bdd -> query('SELECT * FROM company'); 
+            $requestInvoice = $bdd->query('SELECT * FROM invoice ORDER BY invoice_date DESC'); 
+            $requestPeople = $bdd->query('SELECT * FROM people'); 
+            $requestCompany = $bdd -> query('SELECT * FROM company'); 
 
-        $dataInvoice = $requestInvoice -> fetchAll();
-        $dataPeoples = $requestPeople -> fetchAll();
-        $dataCompany = $requestCompany -> fetchAll();  
+            $dataInvoice = $requestInvoice -> fetchAll();
+            $dataPeoples = $requestPeople -> fetchAll();
+            $dataCompany = $requestCompany -> fetchAll();  
 
         require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/View/invoice/index.php"); 
     }
@@ -28,6 +28,18 @@ class invoiceController extends Controller{
 //      │  SHOW  │
 //      └────────┘
     public function show($id) {
+
+        require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/Model/require.php");
+
+        $requestInvoice = $bdd->query('SELECT * FROM invoice WHERE invoice_id=' .$id); 
+        $dataInvoice = $requestInvoice -> fetch();
+
+        $requestPeople = $bdd->query('SELECT * FROM people WHERE people_id=' .$dataInvoice['people_id']); 
+        $dataPeoples = $requestPeople -> fetch();
+
+        $requestCompany = $bdd -> query('SELECT * FROM company WHERE company_id=' .$dataInvoice['company_id']); 
+        $dataCompany = $requestCompany -> fetch();  
+
         require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/View/invoice/show.php"); 
     }
 

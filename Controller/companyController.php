@@ -10,19 +10,23 @@ class companyController extends Controller{
 //      ┌─────────┐
 //      │  INDEX  │
 //      └─────────┘
-    public function index() {
-        require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/Model/require.php");
+public function index() {
+    require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/Model/model.php");
 
-        $requestCompany = $bdd -> query('SELECT * FROM company ORDER BY company_name ASC');
-        $dataCompany = $requestCompany -> fetchAll();
+    $clients = get_all_clients();
+    // $providers = get_all_providers();
 
-        require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/View/company/index.php"); 
-    }
+    require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/View/company/index.php"); 
+}
 
 //      ┌────────┐
 //      │  SHOW  │
 //      └────────┘
     public function show($id) {
+
+        $requestCompany = $bdd -> query('SELECT * FROM company WHERE company_id =' .$id);
+        $data = $requestCompany -> fetch();
+
         require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/View/company/show.php"); 
     }
 
@@ -94,7 +98,6 @@ public function store() {
 
         require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/Model/require.php");
 
-
         if(isset($_POST['company_name']) AND isset($_POST['VAT_number']) AND isset($_POST['country'])){
             
             $company_name = $_POST['company_name'];
@@ -110,7 +113,6 @@ public function store() {
             ));
         }
         header('Location: ../../company');
-
     }
 
 //      ┌──────────┐

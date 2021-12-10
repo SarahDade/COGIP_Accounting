@@ -22,7 +22,7 @@ header ul li{
 }
 header ul li a{
     border-radius: 4px;
-    padding: 0.5vh 1vh 0.7vh;
+    /* padding: 0.5vh 1vh 0.7vh; */
     transition-duration: 0.4s;
     text-decoration: none;
     color:#F4F4F4
@@ -33,14 +33,11 @@ header ul li a:hover{
 }
 
 .logo{
+    /* background-color: #77bdeb; */
     /* flex-grow: 1.5; */
-    background-color: #18A0FB;
-    padding: 0 2em;
-}
-.logo p{
-    color: #F4F4F4;
-    font-weight: bold;
-    position: relative;
+    /* padding: 0 8em 0 2em; */
+    /* height: 5px; */
+    width: auto;
 }
 .wrapper{
     display: grid;

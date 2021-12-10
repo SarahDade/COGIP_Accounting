@@ -5,9 +5,12 @@ $css = "../../";
 
 ob_start();
 ?>
-<ul>
+    <ul>
         <li>
-            <a href="../people/create">Create contact</a> 
+            <a href="../people">Contact page</a>
+        </li>
+        <li>
+            <a href="../people/create">Create contact</a>
         </li>
     </ul>
     <table border='1px solid black'>

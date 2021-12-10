@@ -28,5 +28,4 @@
         public function is_int($number){
             return(is_int($number) ? $number : false);
         }
-
     }

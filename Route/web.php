@@ -39,4 +39,11 @@ $routes->add('company/edit/$id', 'companyController@edit');                     
 $routes->add('company/update/$id', 'companyController@update');                         // update
 $routes->add('company/delete/$id', 'companyController@delete');                         // delete
 
+//      ┌──────────────────┐
+//      │  userController  │
+//      └──────────────────┘
+$routes->add('dashboard', 'userController@index');                                      // index
+$routes->add('login', 'userController@login');                                          // login
+$routes->add('logout', 'userController@logout');                                        // logout
+
 $routes->loader();

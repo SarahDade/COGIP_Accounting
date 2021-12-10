@@ -36,7 +36,7 @@
                 <form action="./invoice/delete/<?php echo $invoice['invoice_id'];?>" method="POST">
                     <tr>
                         <td>
-                            <?php echo $invoice['invoice_date']; ?>
+                            <a href=<?php echo "./invoice/".$invoice['invoice_id']?>><?php echo $invoice['invoice_date'];?></a>
                         </td>
                         <td>
                             <?php 
@@ -58,11 +58,11 @@
                             ?>
                         </td>
                         <td>
-                            <input type="hidden" name="invoice_id" value=<?php echo $invoice['invoice_id'];?>>
-                            <input type="submit" name="del" value="delete">
+                            <a href="./invoice/edit/<?php echo $invoice['invoice_id'];?>">Update</a>
                         </td>
                         <td>
-                            <a href="./invoice/edit/<?php echo $invoice['invoice_id'];?>">Update</a>
+                            <input type="hidden" name="invoice_id" value=<?php echo $invoice['invoice_id'];?>>
+                            <input type="submit" name="del" value="delete">
                         </td>
                     </tr>
                 </form>

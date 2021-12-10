@@ -15,8 +15,8 @@ class peopleController extends Controller{
 
         require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/Model/require.php");
 
-
         $request = $bdd -> query('SELECT * FROM people ORDER BY firstname ASC');
+        $dataPeople = $request -> fetchAll();
 
         require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/View/people/index.php"); 
     }

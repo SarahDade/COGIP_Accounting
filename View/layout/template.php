@@ -39,7 +39,7 @@ function redirect($link){
 <body>
     <header>
         <ul>
-            <li class="logo"><p>COGIP</p></li>
+            <li class="logo"><img src="<?= $css.$_ENV['directory'].'/public/storage/cogip-logo.svg' ?>" alt="logo"></li>
             <li><a href="/COGIP_Accounting">Home</a></li>
             <li><a href="/COGIP_Accounting/invoice">Invoice</a></li>
             <li><a href="/COGIP_Accounting/company">Company</a></li>

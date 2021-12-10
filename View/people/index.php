@@ -31,7 +31,7 @@
             </td>
         </tr>
             <?php
-                while($data = $request -> fetch()){
+                foreach ($dataPeople as $data) {
             ?>
                 <form action="./people/delete/<?php echo $data['people_id'];?>" method="POST">
 
