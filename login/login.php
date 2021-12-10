@@ -32,7 +32,7 @@
                 }
             }
             else{
-                array_push($errors, "Wrong id");
+                header("Location: ../View/Error/error.php");
             }
         }
         if(empty($email)){
