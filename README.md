@@ -9,10 +9,10 @@
 
 ## L'équipe?
 
-![image](./Pictures/github.png) Sara Dade
-* Thibaut
-* Zaccaria Tabi
-* Christophe Buffe
+![image](./Pictures/github.png) [Sara Dade] (https://github.com/SarahDade)
+![image](./Pictures/github.png) [Thibaut Fourneaux] (https://github.com/FourneauxThibaut)
+![image](./Pictures/github.png) [Zaccaria Tabi] (https://github.com/tbzaccaria)
+![image](./Pictures/github.png) [Christophe Buffe] (https://github.com/)
 
 ## Les objectifs?
 
