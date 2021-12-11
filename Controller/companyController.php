@@ -14,8 +14,8 @@ public function index() {
     require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/Model/model.php");
 
     $clients = get_all_clients();
-    // $providers = get_all_providers();
-
+    $providers = get_all_providers();
+    
     require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/View/company/index.php"); 
 }
 
@@ -35,6 +35,12 @@ public function index() {
 //      └──────────┘
     public function create() {
         require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/Model/require.php");
+        
+        $requestCompanyType = $bdd -> query('SELECT * FROM company join checkouts on company.id = checkouts.company_id 
+        join type on checkouts.type_id = type.id');
+        // join type and not checkouts
+        $data = $requestCompanyType -> fetchAll(PDO::FETCH_ASSOC);
+
         require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/View/company/create.php"); 
     }
 
@@ -45,6 +51,9 @@ public function store() {
     require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/Model/require.php");
     require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/Controller/Validation.php");
 
+        echo '<pre>';
+        var_dump($_POST);
+        // die();
     if(isset($_POST['submit'])){
 
         if(!empty($_POST['company_name']) AND !empty($_POST['VAT_number']) AND !empty($_POST['country'])){
@@ -52,11 +61,7 @@ public function store() {
             $company_name = $_POST['company_name'];
             $VAT_number = $_POST['VAT_number'];
             $country = $_POST['country'];
-
-            $validation = new validate();
-            $validation->string($company_name);
-            // validation tva string and number don't know how to do this
-            $validation->string($country);
+            $type = $_POST['type'];
 
             // check name
             $request = $bdd -> prepare('INSERT INTO company(company_name, VAT_number, country) VALUES(?, ?, ?)');
@@ -64,9 +69,17 @@ public function store() {
             $request -> execute(array(
                 $company_name,
                 $VAT_number,
-                $country
+                $country,
             ));
+            $lastId = $bdd->lastInsertId();
 
+
+            $request = $bdd -> prepare('INSERT INTO checkouts(company_id, type_id) VALUES(?, ?)');
+            
+            $request -> execute(array(
+                $lastId,
+                $type
+            ));
             
             header('Location: ../company');
         }

@@ -6,15 +6,6 @@ $css = "../../";
 ob_start();
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create company</title>
-</head>
-<body>
     <h1>Create company</h1>
     <ul>
         <li>
@@ -25,9 +16,34 @@ ob_start();
         <input type="text" name="company_name" placeholder="Name country">
         <input type="text" name="VAT_number" placeholder="T.V.A">
         <input type="text" name="country" placeholder="Country">
+        <select  name="type">
+        <?php 
+            foreach ($data as $type) {
+                $array = [];
+                array_push($array, $type['category']);
+                
+                foreach ($array as $element) {
+                    if( $type['category'] != $element ){
+                }
+                        echo '<option name="type" value="'.$type['type_id'].'">'.$type['category'].'</option>';
+        
+                }} ?>
+        </select>
         <input type="submit" name="submit" value="submit">
     </form>
 <?php 
 $content = ob_get_clean();
 
-require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/View/layout/template.php");
+if( isset($_SESSION['right_access'])){
+    switch ($_SESSION['right_access']) {
+        case 2: case 3:
+            require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/View/layout/admin_template.php");
+            break;
+        default:
+            require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/View/layout/template.php");
+            break;
+    }
+}else{
+    require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/View/layout/template.php");
+}
+

@@ -6,23 +6,37 @@ $dotenv->load();
 require (__DIR__ . "./Controller.php");
 
 class userController extends Controller{
-
+    
 //      ┌─────────┐
-//      │  INDEX  │
+//      │  index  │
 //      └─────────┘
     public function index() {
         require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/View/user/index.php"); 
+    }
+
+//      ┌────────┐
+//      │  show  │
+//      └────────┘
+    public function show($id) {
+        require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/View/user/show.php"); 
     }
 
 //      ┌─────────┐
 //      │  login  │
 //      └─────────┘
     public function login() {
+        require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/View/user/login.php"); 
+    }
+
+//      ┌───────────┐
+//      │  connect  │
+//      └───────────┘
+    public function connect() {
+
         require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/Model/require.php");
-        session_start();
     
-        // $email = $_POST['email'];
-        // $password = $_POST['password'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
         $errors = array();
     
         if(isset($_POST['submit'])){
@@ -39,42 +53,35 @@ class userController extends Controller{
                 if($userexist == 1 ){
     
                     $userinfo = $requser->fetch();
-                    $_SESSION['user_id'] = $userinfo['user_id'];
-                    $_SESSION['pseudo'] = $userinfo['pseudo'];
+                    $_SESSION['user_id'] = $userinfo['id'];
+                    $_SESSION['email'] = $userinfo['email'];
                     $_SESSION['right_access'] = $userinfo['right_access'];
-    
-                    if($userinfo['right_access'] == 1){
-                        header("Location: admin.php");
-                    }
-                    if($userinfo["right_access"] == 2){
-                        header("Location: admin.php");
+                    
+                    switch ($userinfo['right_access']) {
+                        case 2:
+                            header('Location: ./');
+                            break;
+                        case 3:
+                            require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/View/index.php"); 
+                            break;
+                        default:
+                            header('Location: ./');
+                            break;
                     }
                 }
                 else{
-                    array_push($errors, "Wrong id");
+                    array_push($errors, "Mail or Password are incorrect");
+                    require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/View/user/login.php"); 
                 }
             }
             if(empty($email)){
                 array_push($errors, "Mail must be completed");
+                require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/View/user/login.php"); 
             }
             if(empty($password)){
                 array_push($errors, "Password must be completed");
+                require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/View/user/login.php"); 
             }
-        }
-        
-    
-        function display_error(){
-            global $errors;
-    
-            if(count($errors) > 0){
-                echo '<div class="error">';
-                
-                foreach($errors as $error){
-                    echo $error .'<br>';
-                }
-                echo '</div>';
-            }
-            header('Location: ../login');
         }
     }
 
@@ -83,12 +90,9 @@ class userController extends Controller{
 //      └──────────┘
     public function logout() {
         
-        if(isset($_POST['disconnect'])){
-            session_start();
-            $_SESSION = array();
-            session_destroy();
-            header('Location: index.php');
-        }
-        header('Location: ../login');
+        $_SESSION = array();
+        session_destroy();
+
+        header('Location: ./');
     }
 }

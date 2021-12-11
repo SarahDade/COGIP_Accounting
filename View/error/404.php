@@ -1,6 +1,6 @@
 <?php $title = "Error";
 
-$css = "../../public/assets/css/style.css";
+$css = "../../";
 
 ob_start();
 ?>
@@ -10,7 +10,7 @@ ob_start();
 <?php 
 $content = ob_get_clean();
 
-require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/View/layout/template.php");
 
+require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/View/layout/template.php");
 
 

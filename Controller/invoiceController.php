@@ -31,13 +31,13 @@ class invoiceController extends Controller{
 
         require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/Model/require.php");
 
-        $requestInvoice = $bdd->query('SELECT * FROM invoice WHERE invoice_id=' .$id); 
+        $requestInvoice = $bdd->query('SELECT * FROM invoice WHERE id=' .$id); 
         $dataInvoice = $requestInvoice -> fetch();
 
-        $requestPeople = $bdd->query('SELECT * FROM people WHERE people_id=' .$dataInvoice['people_id']); 
+        $requestPeople = $bdd->query('SELECT * FROM people WHERE id=' .$dataInvoice['people_id']); 
         $dataPeoples = $requestPeople -> fetch();
 
-        $requestCompany = $bdd -> query('SELECT * FROM company WHERE company_id=' .$dataInvoice['company_id']); 
+        $requestCompany = $bdd -> query('SELECT * FROM company WHERE id=' .$dataInvoice['company_id']); 
         $dataCompany = $requestCompany -> fetch();  
 
         require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/View/invoice/show.php"); 
@@ -74,18 +74,7 @@ public function store() {
             $company_id = $_POST['company_id'];
             $people_id = $_POST['people_id'];
 
-            echo '<pre>';
-            var_dump($_POST);
-            echo '</pre>';
-            echo '<hr>';
-
             $request = $bdd -> prepare('INSERT INTO invoice (invoice_date, company_id, people_id) VALUES(?, ?, ?)');
-
-            echo '<pre>';
-            var_dump($request);
-            echo '</pre>';
-            // die();
-
 
             $request -> execute(array(
                 $invoice_date,
@@ -115,7 +104,7 @@ public function store() {
 
         require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/Model/require.php");
 
-        $request = $bdd -> query('SELECT * FROM invoice WHERE invoice_id='. $id);
+        $request = $bdd -> query('SELECT * FROM invoice WHERE id='. $id);
         $data = $request -> fetch();
 
         require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/View/invoice/edit.php"); 
@@ -130,11 +119,11 @@ public function store() {
 
         if(isset($_POST['invoice_date'])){
 
-            $request = $bdd->prepare("UPDATE invoice SET invoice_date = :invoice_date WHERE invoice_id = :invoice_id");
-    
+            $request = $bdd->prepare("UPDATE invoice SET invoice_date = :invoice_date WHERE id = :id");
+
             $request -> execute(array(
                 'invoice_date' => $_POST['invoice_date'],
-                'invoice_id' => $_POST['invoice_id']
+                'id' => $_POST['id']
             ));
         }
         header('Location: ../../invoice');
@@ -155,10 +144,10 @@ public function store() {
         if(isset($_POST['del'])){
             try{
                 require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/Model/require.php");
-                $request = $bdd -> prepare('DELETE FROM invoice WHERE invoice_id ='. $id);
+                $request = $bdd -> prepare('DELETE FROM invoice WHERE id ='. $id);
 
                 $request -> execute(array(
-                    $invoice_id,
+                    $id,
                     $invoice_date
                 ));
             }

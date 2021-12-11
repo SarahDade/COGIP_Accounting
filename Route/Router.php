@@ -102,7 +102,7 @@ class Router {
                         $url_post_treatment = implode("/",$url_treatment);
 
 
-                        if ($element->path == $url_post_treatment) {
+                        if ($element->path == $url_post_treatment){
 
                             switch ($element->callable[1]) {
                                 case 'create':
@@ -121,8 +121,12 @@ class Router {
                                     break;
                             }
 
-                            $element->call($element->callable, $id);
-                            $redirected = true;
+                            if ($element->access != false) {
+                                $element->call($element->callable, $id);
+                                $redirected = true;
+                            }else{
+                                if (!$redirected) require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/View/error/404.php");  
+                            }
                         }
                     }
                 }
@@ -147,8 +151,12 @@ class Router {
                                 break;
                         }
 
-                        $element->call($element->callable);
-                        $redirected = true;
+                        if ($element->access != false) {
+                            $element->call($element->callable);
+                            $redirected = true;
+                        }else{
+                            if (!$redirected) require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/View/error/404.php");  
+                        }
                     }
                 }
             }

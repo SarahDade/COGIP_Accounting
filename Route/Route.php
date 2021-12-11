@@ -10,6 +10,7 @@ class Route{
     public $path;
     public $callable;
     public $id;
+    public $access = true;
 
 //      ┌───────────────────────────────┐
 //      │  CONSTRUCT - PATH & CALLABLE  │
@@ -31,22 +32,27 @@ class Route{
 
             switch ($access) {
                 case "moderator":
-                    echo "moderator";
-                    echo "<hr>";
-            /*                 if($user->rightaccess >= 1){
-                    // you need to make an SQL REQUEST here (depending on the model probably)
-                } */
+                    if( isset($_SESSION['right_access'])){
+                        if( $_SESSION['right_access'] >= 2){
 
+                        }else{
+                            $this->access = false;
+                        }
+                    }else{
+                        $this->access = false;
+                    }
                 break;
             case "admin":
-                echo "admin";
-                echo "<hr>";
-            /*                 if($user->rightaccess > 1){
-                    // you need to make an SQL REQUEST here (depending on the model probably)
-                } */
-            
-                break;
+                if( isset($_SESSION['right_access'])){
+                    if( $_SESSION['right_access'] >= 3){
 
+                    }else{
+                        $this->access = false;
+                    }
+                }else{
+                    $this->access = false;
+                }
+                break;
         }
     }
 

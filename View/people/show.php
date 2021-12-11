@@ -24,12 +24,14 @@ ob_start();
             <td>
                 Email
             </td>
-            <td>
-                Delete
-            </td>
-            <td>
-                Update
-            </td>
+            <?php if( isset($_SESSION['right_access']) && $_SESSION['right_access'] >=2) {?>
+                <td>
+                    Update
+                </td>
+                <td>
+                    Delete
+                </td>
+            <?php } ?>
         </tr>
                 <form action="../people/delete/<?php echo $data['people_id'];?>" method="POST">
 
@@ -46,16 +48,18 @@ ob_start();
                             <?php echo $data['email'];?>
                         </td>
 
-                        <td>
-                            <!-- Update -->
-                            <a href=<?php echo "../people/edit/".$data['people_id']?>>Update</a>
-                        </td>
+                        <?php if( isset($_SESSION['right_access']) && $_SESSION['right_access'] >=2) {?>
+                            <td>
+                                <!-- Update -->
+                                <a href=<?php echo "../people/edit/".$data['people_id']?>>Update</a>
+                            </td>
 
-                        <td>
-                            <!-- delete -->
-                            <input type="hidden" name="people_id" value=<?php echo $data['people_id'];?>>
-                            <input type="submit" name="del" value="delete">
-                        </td>
+                            <td>
+                                <!-- delete -->
+                                <input type="hidden" name="people_id" value=<?php echo $data['people_id'];?>>
+                                <input type="submit" name="del" value="delete">
+                            </td>
+                        <?php } ?>
                     </tr> 
                 </form>
         </tr>
@@ -64,4 +68,16 @@ ob_start();
 <?php 
 $content = ob_get_clean();
 
-require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/View/layout/template.php");
+if( isset($_SESSION['right_access'])){
+    switch ($_SESSION['right_access']) {
+        case 2: case 3:
+            require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/View/layout/admin_template.php");
+            break;
+        default:
+            require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/View/layout/template.php");
+            break;
+    }
+}else{
+    require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/View/layout/template.php");
+}
+

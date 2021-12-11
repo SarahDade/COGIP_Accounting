@@ -28,9 +28,9 @@ class Controller{
 //      ┌─────────┐
 //      │  STORE  │
 //      └─────────┘
-public function store() {
-    echo 'You need to create the store method to the current view !';
-}
+    public function store() {
+        echo 'You need to create the store method to the current view !';
+    }
 
 //      ┌────────┐
 //      │  EDIT  │

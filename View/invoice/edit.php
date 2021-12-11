@@ -13,9 +13,9 @@
         </li>
     </ul>
 
-    <form action="../update/<?php echo $data['invoice_id'];?>" method="POST">
+    <form action="../update/<?php echo $data['id'];?>" method="POST">
 
-        <input type="hidden" name="invoice_id" value="<?php echo $data['invoice_id'];?>">
+        <input type="hidden" name="id" value="<?php echo $data['id'];?>">
 
         <input type="text" name="invoice_date" placeholder="Date" value="<?php echo $data['invoice_date'];?>">
 
@@ -23,4 +23,17 @@
     </form>
 <?php 
     $content = ob_get_clean();
+    
+if( isset($_SESSION['right_access'])){
+    switch ($_SESSION['right_access']) {
+        case 2: case 3:
+            require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/View/layout/admin_template.php");
+            break;
+        default:
+            require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/View/layout/template.php");
+            break;
+    }
+}else{
     require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/View/layout/template.php");
+}
+

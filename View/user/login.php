@@ -3,7 +3,22 @@ $css = "../";
 
 ob_start();
 ?>
-    <h1>HOMEPAGE</h1>
+    <h1>Login</h1>
+
+    <form name="formConnexion" action="./connect" method="POST">
+
+        <input type="email" name="email" placeholder="Mail">
+        <input type="password" name="password" placeholder="password">
+        <input type="submit" name="submit" value="submit">
+    </form>
+
+    <?php 
+        if( isset($errors) ){
+            foreach ($errors as $error) {
+                echo $error.'<br>';
+            }
+        }
+    ?>
 <?php
 $content = ob_get_clean();
 

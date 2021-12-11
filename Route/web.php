@@ -42,8 +42,10 @@ $routes->add('company/delete/$id', 'companyController@delete');                 
 //      ┌──────────────────┐
 //      │  userController  │
 //      └──────────────────┘
-$routes->add('dashboard', 'userController@index');                                      // index
 $routes->add('login', 'userController@login');                                          // login
+$routes->add('connect', 'userController@connect');                                      // connect
 $routes->add('logout', 'userController@logout');                                        // logout
+$routes->add('user', 'userController@users');                                           // users
+$routes->add('user/$id', 'userController@show');                                        // show
 
 $routes->loader();

@@ -15,9 +15,9 @@ ob_start();
         </li>
     </ul>
     
-    <form action="../update/<?php echo $data['company_id']; ?>" method="POST">
+    <form action="../update/<?php echo $data['id']; ?>" method="POST">
 
-        <input type="hidden" name="company_id" value="<?php echo $data['company_id']; ?>">
+        <input type="hidden" name="company_id" value="<?php echo $data['id']; ?>">
 
         <input type="text" name="company_name" placeholder="Name" value="<?php echo $data['company_name'];?>">
 
@@ -31,4 +31,16 @@ ob_start();
 <?php 
 $content = ob_get_clean();
 
-require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/View/layout/template.php");
+if( isset($_SESSION['right_access'])){
+    switch ($_SESSION['right_access']) {
+        case 2: case 3:
+            require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/View/layout/admin_template.php");
+            break;
+        default:
+            require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/View/layout/template.php");
+            break;
+    }
+}else{
+    require($_SERVER['DOCUMENT_ROOT']."/".$_ENV['directory']."/View/layout/template.php");
+}
+
