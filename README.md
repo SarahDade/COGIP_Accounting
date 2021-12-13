@@ -4,8 +4,8 @@
 
 Application for Accounting use, based on Model View Controller architecture & created with :
 
-![Alt text](./assets/php.svg) ![Alt text](./assets/my-sql.svg)  ![Alt text](./assets/mvc-architecture.svg)
-![Alt text](./assets/html-5.svg) ![Alt text](./assets/css-3.svg)
+![Alt text](./public/storage/php.svg) ![Alt text](./public/storage/my-sql.svg)  ![Alt text](./public/storage/mvc-architecture.svg)
+![Alt text](./public/storage/html-5.svg) ![Alt text](./public/storage/css-3.svg)
 
 ## Table of contents 
 
@@ -36,7 +36,7 @@ Template / Web design / HTML / CSS
 
 ### **Database structure**
          
-![Alt text](./assets/COGIP-db.png) 
+![Database UML](./public/storage/COGIP-db.png) 
 <details>
   <summary>MVC structure</summary>
 
@@ -138,7 +138,7 @@ router->loader();
 ### **Final**
 
 <p align="center">
-  <img width="100%" height="auto" src="./assets/Cogip-invoices.png" alt="Cogip invoices">
+  <img width="100%" height="auto" src="./public/storage/Cogip-invoices.png" alt="Cogip invoices">
 </p>
 
 ## Technologies
