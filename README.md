@@ -126,13 +126,13 @@ Template / Web design / HTML / CSS
 ### **Router** &nbsp;
 
 A new router is executed via the "web.php" file & defines all the routes using a path, a controller and a method. 
-the loader method will execute the middleware and the redirection
+The loader method will execute the middleware and the redirection.
  
 example of use:  
 ```
-router = new Router($url);
-router->add('about', 'controller@method')
-router->loader();
+$router = new Router($url);
+$router->add('about', 'controller@method')
+$router->loader();
 ```
 
 ### **Final**
@@ -143,7 +143,7 @@ router->loader();
 
 ## Technologies
 &nbsp;
-Project is created with:
+This project is created with:
 * PHP version 7.4.9
 * MySQL 8.0.21
 * HTML 5
